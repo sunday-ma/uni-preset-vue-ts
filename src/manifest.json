@@ -1,5 +1,5 @@
 {
-  "name": "uni-preset-vue-demo",
+  "name": "暖阳云被",
   "appid": "",
   "description": "",
   "versionName": "1.0.0",
@@ -46,7 +46,7 @@
   },
   "quickapp": {},
   "mp-weixin": {
-    "appid": "",
+    "appid": "wxb029ba015f2ac967",
     "setting": {
       "urlCheck": false
     },

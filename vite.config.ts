@@ -4,14 +4,13 @@ import { defineConfig, loadEnv } from 'vite'
 import Uni from '@dcloudio/vite-plugin-uni'
 import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
-import Unocss from 'unocss/vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { NutResolver } from 'nutui-uniapp'
 
 // https://vitejs.dev/config/
-export default ({ command, mode }) => {
+export default async ({ command, mode }) => {
   // mode: 区分生产环境还是开发环境
   console.log(command, mode)
   // nr dev:h5 时得到 => serve development
@@ -24,7 +23,7 @@ export default ({ command, mode }) => {
   const env = loadEnv(mode, path.resolve(process.cwd(), 'env'))
   console.log('env', env)
   console.log('UNI_PLATFORM', process.env.UNI_PLATFORM) // 得到 mp-weixin, h5 等
-
+  const UnoCss = await import('unocss/vite').then(i => i.default)
   return defineConfig({
     envDir: './env', // 自定义env目录
     build: {
@@ -68,7 +67,9 @@ export default ({ command, mode }) => {
         dirs: ['src/stores'],
         dts: 'src/typings/auto-import.d.ts',
       }),
-      Unocss(),
+      UnoCss({
+        hmrTopLevelAwait: false,
+      }),
     ],
     resolve: {
       alias: {

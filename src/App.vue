@@ -48,5 +48,12 @@ onHide(() => {
 </script>
 
 <style lang="scss">
+page {
+  background-color: #F9F7F4;
+}
+view {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
 @import "nutui-uniapp/styles/index.scss";
 </style>

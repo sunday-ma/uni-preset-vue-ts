@@ -1,9 +1,8 @@
 // import process from 'node:process'
 import { presetIcons, transformerDirectives } from 'unocss'
+import transformerVariantGroup from '@unocss/transformer-variant-group'
 import presetWeapp from 'unocss-preset-weapp'
 import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
-
-// import transformerDirectives from './src/plugins/transformer-directives'
 
 const { presetWeappAttributify, transformerAttributify } = extractorAttributify()
 
@@ -29,6 +28,7 @@ export default {
     transformerAttributify(),
     transformerClass(),
     transformerDirectives(),
+    transformerVariantGroup(),
   ],
   rules: [
     [
