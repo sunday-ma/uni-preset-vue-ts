@@ -1,6 +1,6 @@
 {
   "weixin": {
-    "appid": "appid",
+    "appid": "wxb029ba015f2ac967",
     "privateKeyPath": "private.appid.key",
     "projectPath": "dist/build/mp-weixin",
     "version": "0.0.1",

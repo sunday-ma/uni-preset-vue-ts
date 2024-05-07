@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// /// <reference types="@uni-helper/vite-plugin-uni-pages/client" />
-// import { pages } from 'virtual:uni-pages'
+/// <reference types="@uni-helper/vite-plugin-uni-pages/client" />
+import { pages } from 'virtual:uni-pages'
 
 onLaunch(() => {
   console.log('App Launch')
@@ -37,7 +37,7 @@ onLaunch(() => {
     })
   }
   // #endif
-  // console.log('pages', pages)
+  console.log('pages', pages)
 })
 onShow(() => {
   console.log('App Show')
@@ -48,6 +48,5 @@ onHide(() => {
 </script>
 
 <style lang="scss">
-@import "@/theme/index.scss";
 @import "nutui-uniapp/styles/index.scss";
 </style>
