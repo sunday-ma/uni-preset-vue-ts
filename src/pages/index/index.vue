@@ -8,43 +8,141 @@
 </route>
 
 <script lang="ts" setup>
-import type { IJson } from '@/interfaces/IJson'
+import mpHtml from 'mp-html/dist/uni-app/components/mp-html/mp-html'
 
-function swiperAnimationFinishEvent(event: IJson) {
-  console.log(event.detail.current)
+/**
+ * 轮播图
+ */
+const bannerData = ref<IBanner[]>([
+  {
+    id: 1,
+    path: '',
+    type: '',
+    url: '/static/banner.png',
+  },
+  {
+    id: 2,
+    path: '',
+    type: '',
+    url: '/static/banner.png',
+  },
+  {
+    id: 3,
+    path: '',
+    type: '',
+    url: '/static/banner.png',
+  },
+])
+
+/**
+ * 轮播图点击事件
+ * @param data 点击数据
+ */
+function handleBannerEvent(data: IBanner) {
+  console.log(data)
+}
+
+/**
+ * 金刚区
+ */
+const kingKongData = ref([
+  {
+    id: 1,
+    title: '领用码',
+    icon: '/static/kingkong-1.png',
+    path: '',
+  },
+  {
+    id: 2,
+    title: '换租码',
+    icon: '/static/kingkong-2.png',
+    path: '',
+  },
+  {
+    id: 3,
+    title: '归还码',
+    icon: '/static/kingkong-3.png',
+    path: '',
+  },
+])
+/**
+ * 金刚区点击事件
+ * @param data 点击数据
+ * @param data.id 点击id
+ * @param data.title 标题
+ * @param data.icon 图标
+ * @param data.path 路由路径
+ */
+function handleKingKongEvent(data: {
+  id: number
+  title: string
+  icon: string
+  path: string
+}) {
+  console.log(data)
+}
+
+/**
+ * ModuleHead 点击事件
+ */
+function handleModuleMoreEvent(type: string) {
+  console.log(type)
+  switch (type) {
+    case 'notice':
+      uni.navigateTo({
+        url: '/pages/notice/index',
+      })
+      break
+    case 'hot':
+      uni.navigateTo({
+        url: '/pages/product/list',
+      })
+      break
+    default:
+      break
+  }
+}
+
+/**
+ * 热销款式
+ */
+const hotStyleData = ref([
+  {
+    id: 1,
+    title: '大豆纤维夏凉被',
+    price: 55,
+    image: '/static/product.png',
+  },
+  {
+    id: 2,
+    title: '3斤新疆棉春秋被',
+    price: 69,
+    image: '/static/product.png',
+  },
+  {
+    id: 3,
+    title: '7斤新疆长绒棉冬被',
+    price: 99,
+    image: '/static/product.png',
+  },
+  {
+    id: 4,
+    title: '10斤冬被加厚',
+    price: 108,
+    image: '/static/product.png',
+  },
+])
+
+function handleProductClick(data: any) {
+  console.log(data)
 }
 </script>
 
 <template>
   <view class="page">
     <!-- #region Banner -->
-    <view class="relative banner">
-      <swiper
-        autoplay
-        circular
-        class="h-539rpx"
-        @animationfinish="swiperAnimationFinishEvent"
-      >
-        <swiper-item>
-          <image
-            src="@/static/banner.png"
-            mode="widthFix"
-            class="w-full"
-          />
-        </swiper-item>
-        <swiper-item>
-          <image
-            src="@/static/banner.png"
-            mode="widthFix"
-            class="w-full"
-          />
-        </swiper-item>
-      </swiper>
-      <view class="absolute bottom-120rpx left-50% translate-x--50% flex items-center gap-12rpx swiper-dots">
-        <view class="dots active" />
-        <view class="dots" />
-        <view class="dots" />
-      </view>
+    <view class="banner">
+      <bf-swiper :data="bannerData" @click="handleBannerEvent" />
     </view>
     <!-- #endregion Banner -->
 
@@ -52,63 +150,68 @@ function swiperAnimationFinishEvent(event: IJson) {
     <view class="relative z-10 px-28rpx mt--98rpx">
       <!-- #region 金刚区 -->
       <view class="grid grid-cols-3 gap-12rpx king-kong-district">
-        <view class="flex flex-col items-center h-292rpx pt-60rpx rounded-18rpx bg-#fff">
-          <image
-            src="@/static/kingkong-1.png"
-            mode="widthFix"
-            class="w-91rpx icon"
-          />
+        <view
+          v-for="item in kingKongData" :key="item.id"
+          class="flex flex-col items-center h-292rpx pt-60rpx rounded-18rpx bg-#fff" @tap="handleKingKongEvent(item)"
+        >
+          <image :src="item.icon" mode="aspectFit" class="w-90rpx h-90rpx icon" />
           <text class="mt-32rpx">
-            领用码
-          </text>
-        </view>
-        <view class="flex flex-col items-center h-292rpx pt-60rpx rounded-18rpx bg-#fff">
-          <image
-            src="@/static/kingkong-2.png"
-            mode="widthFix"
-            class="w-91rpx icon"
-          />
-          <text class="mt-32rpx">
-            换租码
-          </text>
-        </view>
-        <view class="flex flex-col items-center h-292rpx pt-60rpx rounded-18rpx bg-#fff">
-          <image
-            src="@/static/kingkong-3.png"
-            mode="widthFix"
-            class="w-91rpx icon"
-          />
-          <text class="mt-32rpx">
-            归还码
+            {{ item.title }}
           </text>
         </view>
       </view>
-    <!-- #endregion 金刚区 -->
+      <!-- #endregion 金刚区 -->
+
+      <!-- #region 消息通知 -->
+      <view class="module notice">
+        <bf-module-head title="消息通知" more-text="更多" @click="handleModuleMoreEvent('notice')" />
+        <view class="flex flex-col gap-20rpx mt-20rpx list">
+          <view class="flex items-center item">
+            <view class="i-carbon-circle-solid" text="12 #FFD880" />
+            <view class="flex-1 ml-10rpx line-1" text="24 #666">
+              1.领用通知：您的**订单，**年*月*日可到**服务点领取服务点领取
+            </view>
+          </view>
+          <view class="flex items-center item">
+            <view class="i-carbon-circle-solid" text="12 #FFD880" />
+            <view class="flex-1 ml-10rpx line-1" text="24 #666">
+              2.换租通知：您的**订单，距上一次换租已超过*天，请
+            </view>
+          </view>
+          <view class="flex items-center item">
+            <view class="i-carbon-circle-solid" text="12 #FFD880" />
+            <view class="flex-1 ml-10rpx line-1" text="24 #666">
+              3.归还通知：您的**订单，换租次数已使用完毕，请及时
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- #endregion 消息通知 -->
+
+      <!-- #region 热销款式 -->
+      <view class="module hot">
+        <bf-module-head title="热销款式" more-text="查看全部" @click="handleModuleMoreEvent('hot')" />
+        <view class="mt-36rpx">
+          <bf-product :data="hotStyleData" :cols="2" :gap-x="12" :gap-y="26" @click="handleProductClick" />
+        </view>
+      </view>
+      <!-- #endregion 热销款式 -->
+
+      <!-- #region 租赁规则 -->
+      <view class="module rule">
+        <bf-module-head title="租赁规则" />
+        <view class="mt-36rpx">
+          <mp-html content="<div>Hello World!</div>" />
+        </view>
+      </view>
+      <!-- #endregion 租赁规则 -->
     </view>
     <!-- #endregion 主体内容 -->
-    <!-- <view
-      bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600"
-      text="sm white"
-      p="y-2 x-4"
-      border="2 rounded blue-200"
-      transition-all
-    >
-      属性化模式
-    </view> -->
   </view>
 </template>
 
 <style lang="scss" scoped>
-.dots {
-  width: 24rpx;
-  height: 8rpx;
-  background: rgba($color: #fff, $alpha: .5);
-  border-radius: 24rpx;
-  &.active {
-    background: #FFAA00;
-  }
+.module {
+  --at-apply: px-28rpx py-36rpx mt-24rpx bg-#fff rounded-18rpx;
 }
-
-// #region 金刚区
-// #endregion 金刚区
 </style>

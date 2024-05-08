@@ -56,6 +56,9 @@ importers:
       alova:
         specifier: ^2.20.3
         version: 2.20.3
+      mp-html:
+        specifier: ^2.5.0
+        version: 2.5.0
       nutui-uniapp:
         specifier: ^1.7.8
         version: 1.7.8(@uni-helper/uni-app-types@0.5.13(typescript@5.4.5))(vue@3.3.1)
@@ -5920,6 +5923,9 @@ packages:
 
   moment@2.30.1:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
+
+  mp-html@2.5.0:
+    resolution: {integrity: sha512-uvBH5tIaDIlj8qaxsvNXU3RKX0jvXOo3J6FAi/notUv/ds6j79UUTE82aDkxxUk0eLUU0CiCqMrR7WWnytk30Q==}
 
   mrmime@2.0.0:
     resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==}
@@ -16365,6 +16371,8 @@ snapshots:
       moment: 2.30.1
 
   moment@2.30.1: {}
+
+  mp-html@2.5.0: {}
 
   mrmime@2.0.0: {}
 

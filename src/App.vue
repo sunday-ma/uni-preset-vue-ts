@@ -48,12 +48,45 @@ onHide(() => {
 </script>
 
 <style lang="scss">
+@import "nutui-uniapp/styles/index.scss";
 page {
   background-color: #F9F7F4;
+  --at-apply: pb-safe;
 }
 view {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-@import "nutui-uniapp/styles/index.scss";
+.module-head {
+  &-title {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 8rpx;
+      height: 24rpx;
+      border-radius: 23rpx;
+      background: #FFAA00;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@for $i from 1 through 5 {
+  .line-#{$i} {
+    @if $i == '1' {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    } @else {
+      display: -webkit-box!important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      -webkit-line-clamp: $i;
+      -webkit-box-orient: vertical!important;
+    }
+  }
+}
 </style>

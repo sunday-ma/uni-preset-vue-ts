@@ -7,6 +7,8 @@ interface NavigateToOptions {
   url: "/pages/index/index" |
        "/pages/index/index copy" |
        "/pages/mine/mine" |
+       "/pages/notice/index" |
+       "/pages/product/list" |
        "/pages/site/site";
 }
 interface RedirectToOptions extends NavigateToOptions {}

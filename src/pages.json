@@ -20,6 +20,20 @@
       "type": "page"
     },
     {
+      "path": "pages/notice/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "消息通知"
+      }
+    },
+    {
+      "path": "pages/product/list",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "产品列表"
+      }
+    },
+    {
       "path": "pages/site/site",
       "type": "page"
     }

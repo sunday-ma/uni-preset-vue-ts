@@ -7,6 +7,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BfModuleHead: typeof import('./../components/bf-module-head/bf-module-head.vue')['default']
+    BfProduct: typeof import('./../components/bf-product/bf-product.vue')['default']
     BfSwiper: typeof import('./../components/bf-swiper/bf-swiper.vue')['default']
     Component: typeof import('./../components/component/component.vue')['default']
     LoadImage: typeof import('./../components/load-image/load-image.vue')['default']
