@@ -108,9 +108,6 @@ importers:
       '@uni-helper/vite-plugin-uni-pages':
         specifier: ^0.2.18
         version: 0.2.18(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)(typescript@5.4.5)
-      '@unocss/transformer-directives':
-        specifier: ^0.59.4
-        version: 0.59.4
       '@unocss/transformer-variant-group':
         specifier: ^0.59.4
         version: 0.59.4

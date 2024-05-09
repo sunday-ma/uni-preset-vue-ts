@@ -83,7 +83,6 @@
     "@iconify-json/carbon": "^1.1.32",
     "@uni-helper/vite-plugin-uni-manifest": "^0.2.4",
     "@uni-helper/vite-plugin-uni-pages": "^0.2.18",
-    "@unocss/transformer-directives": "^0.59.4",
     "@unocss/transformer-variant-group": "^0.59.4",
     "@vue/runtime-core": "^3.3.13",
     "@vue/tsconfig": "^0.1.3",
