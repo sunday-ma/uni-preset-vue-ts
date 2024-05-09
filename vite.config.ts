@@ -24,12 +24,9 @@ export default async ({ command, mode }) => {
   console.log('env', env)
   console.log('UNI_PLATFORM', process.env.UNI_PLATFORM) // 得到 mp-weixin, h5 等
   const UnoCss = await import('unocss/vite').then(i => i.default)
+
   return defineConfig({
     envDir: './env', // 自定义env目录
-    build: {
-      target: 'es6',
-      cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
-    },
     plugins: [
       // UniPages：https://github.com/uni-helper/vite-plugin-uni-pages
       UniPages({
@@ -71,11 +68,25 @@ export default async ({ command, mode }) => {
         hmrTopLevelAwait: false,
       }),
     ],
+    server: {
+      hmr: true,
+      port: Number.parseInt(env.VITE_APP_PORT, 10),
+    },
     resolve: {
       alias: {
         '@': path.join(process.cwd(), './src'),
       },
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+    },
+    build: {
+      target: 'es6',
+      cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
+      terserOptions: {
+        compress: {
+          drop_console: env.VITE_DELETE_CONSOLE === 'true',
+          drop_debugger: env.VITE_DELETE_CONSOLE === 'true',
+        },
+      },
     },
   })
 }

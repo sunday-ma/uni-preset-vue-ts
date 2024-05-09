@@ -1,5 +1,5 @@
 import { AirDateTimeFormatter } from '../enums/AirDateTimeFormatter'
-import type { IJson } from '@/interfaces/IJson'
+import type { IJson } from '@/common/airPower/intetface/IJson'
 
 /**
  * # 时间日期时间戳格式化类

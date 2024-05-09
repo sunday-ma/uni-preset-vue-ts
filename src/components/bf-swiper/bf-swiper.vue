@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import type { IJson } from '@/interfaces/IJson'
-
 const props = defineProps<{
-  data: IJson
+  data: any
 }>()
 
 const emits = defineEmits<{
@@ -17,7 +15,7 @@ const swiperOptions = ref({
  * 计算轮播图切换
  * @param event 事件对象
  */
-function swiperAnimationFinishEvent(event: IJson) {
+function swiperAnimationFinishEvent(event: any) {
   swiperOptions.value.current = event.detail.current
 }
 

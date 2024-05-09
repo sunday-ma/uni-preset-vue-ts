@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { IJson } from '@/interfaces/IJson'
-
 const props = defineProps<{
   data: any[]
   cols: number
@@ -27,7 +25,7 @@ const classList = computed(() => {
 /**
  * 产品点击事件
  */
-function handleProductClick(item: IJson) {
+function handleProductClick(item: any) {
   emits('click', item)
 }
 </script>

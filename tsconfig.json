@@ -15,6 +15,15 @@
     "allowSyntheticDefaultImports": true,
     "ignoreDeprecations": "5.0"
   },
+  "vueCompilerOptions": {
+    "target": 3,
+    "nativeTags": [
+      "block",
+      "template",
+      "component",
+      "slot"
+    ]
+  },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json", "eslint.config.mjs"],
   "exclude": ["node_modules"]
 }
