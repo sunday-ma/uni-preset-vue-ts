@@ -7,7 +7,7 @@
 </route>
 
 <script lang="ts" setup>
-import { AirDateTime } from '@/common/airPower'
+import { AirDateTime } from '@/common/airPower/helpers/AirDateTime'
 
 // enum NoticeStatusEnum {
 //   // 领用通知

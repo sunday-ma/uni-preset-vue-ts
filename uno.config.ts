@@ -1,6 +1,7 @@
 // import process from 'node:process'
-import { presetIcons, transformerDirectives } from 'unocss'
+import { presetIcons } from 'unocss'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
+import transformerDirectives from '@unocss/transformer-directives'
 import presetWeapp from 'unocss-preset-weapp'
 import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
 

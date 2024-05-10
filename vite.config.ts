@@ -27,6 +27,16 @@ export default async ({ command, mode }) => {
 
   return defineConfig({
     envDir: './env', // 自定义env目录
+    build: {
+      target: 'es6',
+      cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
+      // terserOptions: {
+      //   compress: {
+      //     drop_console: env.VITE_DELETE_CONSOLE === 'true',
+      //     drop_debugger: env.VITE_DELETE_CONSOLE === 'true',
+      //   },
+      // },
+    },
     plugins: [
       // UniPages：https://github.com/uni-helper/vite-plugin-uni-pages
       UniPages({
@@ -77,16 +87,6 @@ export default async ({ command, mode }) => {
         '@': path.join(process.cwd(), './src'),
       },
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
-    },
-    build: {
-      target: 'es6',
-      cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
-      terserOptions: {
-        compress: {
-          drop_console: env.VITE_DELETE_CONSOLE === 'true',
-          drop_debugger: env.VITE_DELETE_CONSOLE === 'true',
-        },
-      },
     },
   })
 }
