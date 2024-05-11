@@ -9,6 +9,11 @@
 
 <script lang="ts" setup>
 import mpHtml from 'mp-html/dist/uni-app/components/mp-html/mp-html'
+import bfProduct from '@/components/bf-product/bf-product.vue'
+import bfSwiper from '@/components/bf-swiper/bf-swiper.vue'
+import bfModuleHead from '@/components/bf-module-head/bf-module-head.vue'
+
+import { ProductEnum } from '@/common/router'
 
 /**
  * 轮播图
@@ -109,32 +114,34 @@ function handleModuleMoreEvent(type: string) {
 const hotStyleData = ref([
   {
     id: 1,
-    title: '大豆纤维夏凉被',
+    title: '学年卡',
     price: 55,
     image: '/static/product.png',
   },
   {
     id: 2,
-    title: '3斤新疆棉春秋被',
+    title: '结业卡',
     price: 69,
     image: '/static/product.png',
   },
   {
     id: 3,
-    title: '7斤新疆长绒棉冬被',
+    title: '单次卡',
     price: 99,
     image: '/static/product.png',
   },
   {
     id: 4,
-    title: '10斤冬被加厚',
+    title: '年卡',
     price: 108,
     image: '/static/product.png',
   },
 ])
 
 function handleProductClick(data: any) {
-  console.log(data)
+  uni.navigateTo({
+    url: `${ProductEnum.DETAIL}?id=${data.id}`,
+  })
 }
 </script>
 
@@ -193,6 +200,7 @@ function handleProductClick(data: any) {
         <bf-module-head title="热销款式" more-text="查看全部" @click="handleModuleMoreEvent('hot')" />
         <view class="mt-36rpx">
           <bf-product :data="hotStyleData" :cols="2" :gap-x="12" :gap-y="26" @click="handleProductClick" />
+          <view class="grid grid-cols-2 gap-x-12rpx gap-y-26rpx" />
         </view>
       </view>
       <!-- #endregion 热销款式 -->
@@ -203,6 +211,7 @@ function handleProductClick(data: any) {
         <view class="mt-36rpx">
           <mp-html content="<div>Hello World!</div>" />
         </view>
+        <view class="i-fluent:scan-dash-20-filled" />
       </view>
       <!-- #endregion 租赁规则 -->
     </view>

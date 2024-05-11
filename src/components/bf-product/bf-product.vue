@@ -9,17 +9,12 @@ const props = defineProps<{
 const emits = defineEmits(['click'])
 
 const classList = computed(() => {
-  const classList = []
-  if (props.cols)
-    classList.push(`grid-cols-${props.cols}`)
-
-  if (props.gapX)
-    classList.push(`gap-x-${props.gapX}rpx`)
-
-  if (props.gapY)
-    classList.push(`gap-y-${props.gapY}rpx`)
-
-  return classList
+  return [
+    'grid',
+    `grid-cols-${props.cols}`,
+    `gap-x-${props.gapX}rpx`,
+    `gap-y-${props.gapY}rpx`,
+  ]
 })
 
 /**
@@ -32,7 +27,7 @@ function handleProductClick(item: any) {
 
 <template>
   <view class="component-product">
-    <view class="grid" :class="classList">
+    <view :class="classList">
       <view v-for="item in props.data" :key="item.id" class="item" @click="handleProductClick(item)">
         <view class="relative w-full pb-100% image-cover">
           <image

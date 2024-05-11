@@ -49,6 +49,7 @@ onHide(() => {
 
 <style lang="scss">
 @import "nutui-uniapp/styles/index.scss";
+
 page {
   background-color: #F9F7F4;
   --at-apply: pb-safe;
@@ -88,5 +89,15 @@ view {
       -webkit-box-orient: vertical!important;
     }
   }
+}
+
+.component-sku-popup .nut-popup__close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32rpx !important;
+  height: 32rpx !important;
+  font-size: 32rpx !important;
+  color: #FFAA00;
 }
 </style>

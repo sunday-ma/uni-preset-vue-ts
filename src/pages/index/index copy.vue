@@ -49,6 +49,23 @@
     >
       属性化模式
     </view>
+    <view class="i-fluent-scan-dash-20-filled" />
+    <view class="i-fluent-multiselect-20-filled" />
+    <view class="i-fluent-checkmark-circle-16-filled" />
+    <view class="i-fluent-checkmark-square-20-filled" />
+    <view class="i-fluent-checkbox-unchecked-20-regular" />
+    <view class="i-fluent-checkmark-square-20-regular" />
+    <view class="i-fluent-clock-12-regular" />
+    <view class="i-fluent-dismiss-16-regular" />
+    <view class="i-fluent-chevron-right-16-regular" />
+    <view class="i-fluent-info-16-regular" />
+    <view class="i-fluent-caret-down-20-filled" />
+    <view class="i-fluent-circle-small-24-filled" />
+    <view class="i-fluent-scan-camera-20-regular" />
+    <view class="i-fluent-star-20-regular" />
+    <view class="i-fluent-star-20-filled" />
+    <view class="i-fluent-search-20-regular" />
+    <view class="i-fluent-wallet-credit-card-20-regular" />
   </view>
 </template>
 

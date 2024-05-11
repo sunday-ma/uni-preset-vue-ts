@@ -1,7 +1,13 @@
 <script lang="ts" setup>
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   data: any
-}>()
+  height?: string | number
+  bottom?: string | number
+}>(), {
+  data: [],
+  height: '539rpx',
+  bottom: '120rpx',
+})
 
 const emits = defineEmits<{
   (event: 'click', data: IBanner): void
@@ -33,19 +39,19 @@ function swiperItemClickEvent(data: IBanner) {
     <swiper
       autoplay
       circular
-      class="h-539rpx"
+      :style="{ height: props.height }"
       @animationfinish="swiperAnimationFinishEvent"
     >
       <swiper-item v-for="item in props.data" :key="item.id">
         <image
           :src="item.url"
-          mode="widthFix"
-          class="w-full"
+          mode="aspectFill"
+          class="w-full h-full"
           @click="swiperItemClickEvent(item)"
         />
       </swiper-item>
     </swiper>
-    <view class="absolute bottom-120rpx left-50% translate-x--50% flex items-center gap-12rpx swiper-dots">
+    <view class="absolute bottom-120rpx left-50% translate-x--50% flex items-center gap-12rpx swiper-dots" :style="{ bottom: props.bottom }">
       <view
         v-for="(item, index) in props.data"
         :key="item.id"

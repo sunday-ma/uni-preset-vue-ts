@@ -17,6 +17,7 @@ export default {
       extraProperties: {
         'display': 'inline-block',
         'vertical-align': 'middle',
+        'line-height': '1',
       },
     }),
   ],

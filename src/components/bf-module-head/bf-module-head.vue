@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
   title: string
+  description?: string
   moreText?: string
 }>()
 
@@ -20,6 +21,9 @@ function onMoreClick() {
   <view class="flex items-center justify-between component-module-head">
     <view class="relative module-head-title" p="l-20rpx" text="32 #66421E" leading="none">
       {{ props.title }}
+      <text v-if="props.description" class="text-18 text-#9FA0A0">
+        {{ props.description }}
+      </text>
     </view>
     <view v-if="props.moreText" class="flex items-center" text="24 #7a542d" leading="none" @click="onMoreClick">
       <view>{{ props.moreText }}</view>

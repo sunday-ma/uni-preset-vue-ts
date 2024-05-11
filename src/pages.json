@@ -27,10 +27,25 @@
       }
     },
     {
-      "path": "pages/product/list",
+      "path": "pages/order/detail",
+      "type": "page"
+    },
+    {
+      "path": "pages/order/list",
+      "type": "page"
+    },
+    {
+      "path": "pages/product/detail",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "产品列表"
+        "navigationBarTitleText": "产品详情"
+      }
+    },
+    {
+      "path": "pages/product/pay",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "订单详情"
       }
     },
     {

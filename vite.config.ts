@@ -6,7 +6,7 @@ import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
+import Components from '@uni-helper/vite-plugin-uni-components'
 import { NutResolver } from 'nutui-uniapp'
 
 // https://vitejs.dev/config/

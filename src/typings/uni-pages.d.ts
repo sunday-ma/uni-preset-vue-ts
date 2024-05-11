@@ -8,7 +8,10 @@ interface NavigateToOptions {
        "/pages/index/index copy" |
        "/pages/mine/mine" |
        "/pages/notice/index" |
-       "/pages/product/list" |
+       "/pages/order/detail" |
+       "/pages/order/list" |
+       "/pages/product/detail" |
+       "/pages/product/pay" |
        "/pages/site/site";
 }
 interface RedirectToOptions extends NavigateToOptions {}
