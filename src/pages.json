@@ -17,7 +17,17 @@
     },
     {
       "path": "pages/mine/mine",
-      "type": "page"
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    },
+    {
+      "path": "pages/mine/settings",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
     },
     {
       "path": "pages/notice/index",
@@ -32,7 +42,10 @@
     },
     {
       "path": "pages/order/list",
-      "type": "page"
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "我的订单"
+      }
     },
     {
       "path": "pages/product/detail",
@@ -46,6 +59,13 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "订单详情"
+      }
+    },
+    {
+      "path": "pages/single/system",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "互信会员制度"
       }
     },
     {
