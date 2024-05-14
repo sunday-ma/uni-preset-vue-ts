@@ -27,12 +27,6 @@ const navigationList = ref([
     path: '/pages/order/list',
   },
   {
-    id: 2,
-    title: '我的会员卡',
-    icon: 'i-fluent-wallet-credit-card-20-regular',
-    path: '',
-  },
-  {
     id: 3,
     title: '服务点查询',
     icon: 'i-fluent-search-20-regular',
@@ -49,7 +43,7 @@ const navigationList = ref([
     id: 5,
     title: '关于我们',
     icon: 'i-fluent-chat-warning-20-regular',
-    path: '',
+    path: '/pages/single/about',
   },
 ])
 function handleNavigationEvent(data: {

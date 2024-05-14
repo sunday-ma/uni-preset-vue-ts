@@ -21,14 +21,16 @@ declare module '@vue/runtime-core' {
     NutCell: typeof import('nutui-uniapp/components/cell/cell.vue')['default']
     NutCellGroup: typeof import('nutui-uniapp/components/cellgroup/cellgroup.vue')['default']
     NutCheckbox: typeof import('nutui-uniapp/components/checkbox/checkbox.vue')['default']
+    NutCollapse: typeof import('nutui-uniapp/components/collapse/collapse.vue')['default']
+    NutCollapseItem: typeof import('nutui-uniapp/components/collapseitem/collapseitem.vue')['default']
     NutConfigProvider: typeof import('nutui-uniapp/components/configprovider/configprovider.vue')['default']
     NutDatePicker: typeof import('nutui-uniapp/components/datepicker/datepicker.vue')['default']
-    NutEmpty: typeof import('nutui-uniapp/components/empty/empty.vue')['default']
     NutIcon: typeof import('nutui-uniapp/components/icon/icon.vue')['default']
     NutInput: typeof import('nutui-uniapp/components/input/input.vue')['default']
     NutPopup: typeof import('nutui-uniapp/components/popup/popup.vue')['default']
-    NutSwitch: typeof import('nutui-uniapp/components/switch/switch.vue')['default']
+    NutRate: typeof import('nutui-uniapp/components/rate/rate.vue')['default']
     NutTabPane: typeof import('nutui-uniapp/components/tabpane/tabpane.vue')['default']
     NutTabs: typeof import('nutui-uniapp/components/tabs/tabs.vue')['default']
+    NutTag: typeof import('nutui-uniapp/components/tag/tag.vue')['default']
   }
 }

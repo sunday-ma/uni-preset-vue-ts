@@ -9,6 +9,20 @@
       }
     },
     {
+      "path": "pages/defaced/detail",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "污损订单"
+      }
+    },
+    {
+      "path": "pages/defaced/list",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "污损订单"
+      }
+    },
+    {
       "path": "pages/index/index copy",
       "type": "page",
       "style": {
@@ -38,7 +52,10 @@
     },
     {
       "path": "pages/order/detail",
-      "type": "page"
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "订单详情"
+      }
     },
     {
       "path": "pages/order/list",
@@ -62,6 +79,13 @@
       }
     },
     {
+      "path": "pages/single/about",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "关于我们"
+      }
+    },
+    {
       "path": "pages/single/system",
       "type": "page",
       "style": {
@@ -70,7 +94,10 @@
     },
     {
       "path": "pages/site/site",
-      "type": "page"
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "服务点"
+      }
     }
   ],
   "globalStyle": {

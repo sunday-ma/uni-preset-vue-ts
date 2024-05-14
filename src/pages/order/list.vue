@@ -41,6 +41,17 @@ const orderStatusColor = ref({
 const themeVars = reactive({
   buttonDefaultPadding: '0 24rpx',
 })
+
+function handleDefacedEvent() {
+  uni.navigateTo({
+    url: '/pages/defaced/list',
+  })
+}
+
+/**
+ * 归还/换租弹窗
+ */
+const showMainPopuo = ref(false)
 </script>
 
 <template>
@@ -134,7 +145,7 @@ const themeVars = reactive({
                 </view>
               </view>
               <view class="flex items-center justify-end gap-20rpx mt-24rpx">
-                <nut-button plain custom-color="#FC6565" custom-style="--nut-button-default-border-color: #FC6565;height: 60rpx">
+                <nut-button plain custom-color="#FC6565" custom-style="--nut-button-default-border-color: #FC6565;height: 60rpx" @click="handleDefacedEvent">
                   污损费
                 </nut-button>
                 <nut-button plain custom-style="height: 60rpx">
@@ -143,7 +154,7 @@ const themeVars = reactive({
                 <nut-button plain custom-style="height: 60rpx">
                   归还
                 </nut-button>
-                <nut-button plain custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;height: 60rpx">
+                <nut-button plain custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;height: 60rpx" @click="showMainPopuo = true">
                   换租
                 </nut-button>
               </view>
@@ -156,6 +167,87 @@ const themeVars = reactive({
         </nut-tab-pane>
       </nut-tabs>
     </view>
+
+    <!-- #region 归还/换租弹窗 -->
+    <nut-popup
+      v-model:visible="showMainPopuo"
+      position="center"
+      custom-style="width: 694rpx; padding: 76rpx 28rpx; border-radius: 18rpx;"
+    >
+      <view class="flex flex-col items-center return-rent-wrap">
+        <view class="flex flex-center w-148 h-148 rounded-full bg-#ffaa00 icon">
+          <image
+            src="@/static/notice/return.svg"
+            mode="aspectFit"
+            class="w-95 h-95"
+          />
+        </view>
+        <view class="mt-36rpx text-38 text-#66421E leading-none">
+          换租
+        </view>
+        <view class="flex flex-col gap-20rpx text-28 text-#3E3A39 w-full mt-58rpx list">
+          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 item">
+            <view>服务点：</view>
+            <view class="flex-1 line-1">
+              济南市槐荫区和谐广场银座中心2#806室
+            </view>
+            <view class="i-carbon-chevron-right ml-a text-40 text-#3E3A39" />
+          </view>
+          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 item">
+            <view>预约换租时间:</view>
+            <view class="flex-1">
+              <view class="flex items-center gap-30rpx ml-30rpx">
+                <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#fff">
+                  <image
+                    src="@/static/date.svg"
+                    mode="widthFix"
+                    class="w-22 h-22 mr-15rpx"
+                  />
+                  <view>{{ '请选择' }}</view>
+                </view>
+                <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#fff">
+                  <image
+                    src="@/static/time.svg"
+                    mode="widthFix"
+                    class="w-22 h-22 mr-15rpx"
+                  />
+                  <view>{{ '请选择' }}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 item">
+            <view>剩余次数：</view>
+            <view>8/9 次</view>
+          </view>
+        </view>
+        <view class="flex items-center justify-between w-full px-46rpx mt-74rpx">
+          <nut-button
+            custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #FFAA00; width: 209rpx;"
+          >
+            确认换租
+          </nut-button>
+          <nut-button
+            plain
+            custom-color="#FFAA00"
+            custom-style="width: 209rpx;"
+            @click="showMainPopuo = false"
+          >
+            返回
+          </nut-button>
+        </view>
+      </view>
+    </nut-popup>
+    <!-- #endregion -->
+
+    <!-- #region 服务点弹窗 -->
+    <!-- #endregion -->
+
+    <!-- #region 预约归还/换租日期 -->
+    <!-- #endregion -->
+
+    <!-- #region 预约归还/换租时间 -->
+    <!-- #endregion -->
   </nut-config-provider>
 </template>
 
