@@ -8,8 +8,8 @@
 
 <script lang="ts" setup>
 // import { previewImage } from '@uni-helper/uni-promises'
+import { ORDERSTATUS } from '@/common/orderStatus'
 import bfModuleHead from '@/components/bf-module-head/bf-module-head.vue'
-import { useCall } from '@/composables/useCall'
 
 const { setClipboard } = useCopy()
 const { phoneCall } = useCall()
@@ -46,78 +46,122 @@ const themeVars = reactive({
       <view class="order-info">
         <nut-cell>
           <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
-            <bf-module-head title="订单信息" />
+            <view class="flex flex-col gap-24rpx w-100%">
+              <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
+                <view class="flex items-center label">
+                  <view class="leading-none">
+                    领用人: 云暖阳
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </nut-cell>
+        <nut-cell>
+          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
+            <view class="flex flex-col gap-24rpx w-100%">
+              <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
+                <view class="flex items-center label">
+                  <view class="leading-none" @click="phoneCall('114')">
+                    领用人手机号：132 1234 5678
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </nut-cell>
+        <nut-cell>
+          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
+            <view class="flex flex-col gap-24rpx w-100%">
+              <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
+                <view class="flex items-center label">
+                  <view class="leading-none">
+                    使用地址：济南市槐荫区暖阳云被中学 4栋202室
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </nut-cell>
+        <nut-cell>
+          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
             <view class="flex">
               <image
                 src="@/static/product-1.png"
                 mode="aspectFill"
                 class="w-136 h-136 rounded-10rpx"
               />
-              <view class="flex-1 pt-18rpx pl-40rpx">
-                <view class="flex items-baseline w-100%">
+              <view class="flex-1 pl-40rpx">
+                <view class="flex items-baseline justify-between w-100%">
                   <text class="text-26rpx text-#333">
                     学年卡
                   </text>
-                  <text class="ml-a text-24rpx text-#3E3A39">
-                    &yen;600
-                  </text>
+                  <view :style="{ color: ORDERSTATUS.COLLECTED }">
+                    待领用
+                  </view>
                 </view>
-                <view class="mt-22rpx text-18rpx text-#999">
-                  白色；150cm*210cm；9次
+                <view class="mt-22rpx text-18rpx leading-1.6em text-#999">
+                  <view>
+                    花色：白色
+                  </view>
+                  <view>
+                    尺寸：150cm*210cm
+                  </view>
+                  <view>
+                    换租次数：0/9次
+                  </view>
                 </view>
               </view>
             </view>
             <view class="flex flex-col gap-24rpx w-100%">
-              <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
-                <view class="flex items-center label">
-                  <view class="leading-none">
-                    订单编号
-                  </view>
+              <view class="flex items-center justify-between">
+                <view>
+                  <nut-tag plain custom-color="#ffaa00">
+                    新用户
+                  </nut-tag>
                 </view>
-                <view class="text-#999">
-                  123456789876543212345 | <text class="text-#FFAA00" @click="setClipboard('编号')">
-                    复制
-                  </text>
+                <view class="text-[#ffaa00]">
+                  赠送礼品
                 </view>
               </view>
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
                   <view class="leading-none">
-                    领用人
+                    会员卡
                   </view>
                 </view>
-                <view class="text-#999">
-                  云暖阳
+                <view>
+                  &yen;200
                 </view>
               </view>
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
                   <view class="leading-none">
-                    使用地址
+                    商品总价
                   </view>
                 </view>
-                <view class="text-#999">
-                  济南市槐荫区暖阳云被中学 4栋202室
+                <view>
+                  &yen;800
                 </view>
               </view>
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
                   <view class="leading-none">
-                    领用人手机号
+                    优惠金额
                   </view>
                 </view>
-                <view class="text-#999" @click="phoneCall('114')">
-                  132 12345 678
+                <view class="text-#FC3C32">
+                  减&yen;50
                 </view>
               </view>
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
                   <view class="leading-none">
-                    预约领用时间
+                    实付款
                   </view>
                 </view>
-                <view class="text-#999">
-                  2024-04-27 10:50
+                <view>
+                  &yen;750
                 </view>
               </view>
             </view>
@@ -126,25 +170,26 @@ const themeVars = reactive({
       </view>
       <!-- #endregion -->
 
-      <!-- #region 最新记录 最近一次的发放或者验收记录，有哪个展示哪一个，仅展示一个 -->
-      <view class="mt-24rpx" style="--nut-cell-padding: 13px 16px 48rpx 16px">
+      <!-- #region 订单信息2 -->
+      <view class="mt-24rpx">
         <nut-cell>
           <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
-            <bf-module-head title="发放记录" />
             <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
               <view class="flex items-center label">
                 <view class="leading-none">
-                  发放次数
+                  订单编号
                 </view>
               </view>
               <view class="text-#999">
-                2/9次
+                123456789876543212345 | <text class="text-#FFAA00" @click="setClipboard('编号')">
+                  复制
+                </text>
               </view>
             </view>
             <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
               <view class="flex items-center label">
                 <view class="leading-none">
-                  发放时间
+                  创建时间
                 </view>
               </view>
               <view class="text-#999">
@@ -154,66 +199,11 @@ const themeVars = reactive({
             <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
               <view class="flex items-center label">
                 <view class="leading-none">
-                  发放服务点
+                  付款时间
                 </view>
               </view>
               <view class="text-#999">
-                发放服务点
-              </view>
-            </view>
-            <view class="text-24 text-#333 cell">
-              <view class="flex items-center label">
-                <view class="leading-none">
-                  发放照片
-                </view>
-              </view>
-              <view class="mt-30rpx scroll-list">
-                <scroll-view scroll-x enable-flex class="w-full whitespace-nowrap">
-                  <view class="flex gap-10rpx">
-                    <view class="flex-shrink-0">
-                      <image
-                        src="@/static/product-1.png"
-                        mode="aspectFill"
-                        class="w-194 h-194 rounded-18rpx"
-                      />
-                    </view>
-                    <view class="flex-shrink-0">
-                      <image
-                        src="@/static/product.png"
-                        mode="aspectFill"
-                        class="w-194 h-194 rounded-18rpx"
-                      />
-                    </view>
-                    <view class="flex-shrink-0">
-                      <image
-                        src="@/static/product-1.png"
-                        mode="aspectFill"
-                        class="w-194 h-194 rounded-18rpx"
-                      />
-                    </view>
-                    <view class="flex-shrink-0">
-                      <image
-                        src="@/static/product.png"
-                        mode="aspectFill"
-                        class="w-194 h-194 rounded-18rpx"
-                      />
-                    </view>
-                    <view class="flex-shrink-0">
-                      <image
-                        src="@/static/product-1.png"
-                        mode="aspectFill"
-                        class="w-194 h-194 rounded-18rpx"
-                      />
-                    </view>
-                    <view class="flex-shrink-0">
-                      <image
-                        src="@/static/product.png"
-                        mode="aspectFill"
-                        class="w-194 h-194 rounded-18rpx"
-                      />
-                    </view>
-                  </view>
-                </scroll-view>
+                2024-03-26 18:29:02
               </view>
             </view>
           </view>
@@ -460,26 +450,21 @@ const themeVars = reactive({
       <!-- #region 操作栏 -->
       <view class="px-30rpx py-18rpx footer">
         <view class="flex items-center justify-end gap-20rpx">
-          <nut-button plain>
-            取消订单
+          <nut-button custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;height: 60rpx">
+            发放
           </nut-button>
-          <nut-button
-            custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;"
-          >
-            立即支付
+          <nut-button plain custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;height: 60rpx">
+            换租
           </nut-button>
-          <!-- <nut-button plain custom-color="#FC6565" custom-style="--nut-button-default-border-color: #FC6565;">
-            污损费
-          </nut-button>
-          <nut-button plain>
-            申请退款
-          </nut-button>
-          <nut-button plain>
+          <nut-button plain custom-style="height: 60rpx">
             归还
           </nut-button>
-          <nut-button plain custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;">
-            换租
-          </nut-button> -->
+          <nut-button custom-color="#FC6565" custom-style="--nut-button-default-border-color: #FC6565;height: 60rpx">
+            污损费
+          </nut-button>
+          <nut-button plain custom-style="height: 60rpx">
+            退款
+          </nut-button>
         </view>
       </view>
       <!-- #endregion -->

@@ -40,9 +40,11 @@ export default async ({ command, mode }) => {
     plugins: [
       // UniPages：https://github.com/uni-helper/vite-plugin-uni-pages
       UniPages({
-        exclude: ['**/components/**/**.*', '**/my/**/**.vue'],
+        configSource: 'pages.config.ts',
+        exclude: ['**/components/**/**.*'],
         routeBlockLang: 'json5', // 虽然设了默认值，但是vue文件还是要加上 lang="json5", 这样才能很好地格式化
         homePage: 'pages/index/index', // 首页路径
+        subPackages: ['src/pages-site'],
         dts: 'src/typings/uni-pages.d.ts',
       }),
       // UniManifest：https://github.com/uni-helper/vite-plugin-uni-manifest
@@ -71,7 +73,7 @@ export default async ({ command, mode }) => {
           ],
         }],
         ignore: ['createApp'],
-        dirs: ['src/stores'],
+        dirs: ['src/stores', 'src/composables'],
         dts: 'src/typings/auto-import.d.ts',
       }),
       UnoCss({

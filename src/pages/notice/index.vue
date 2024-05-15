@@ -491,6 +491,7 @@ onLoad(() => {
             </view>
           </view>
         </view>
+        <!-- <bf-empty type="notice" /> -->
         <!-- #engregion 消息通知列表 -->
       </nut-tab-pane>
     </nut-tabs>

@@ -7,8 +7,15 @@
 </route>
 
 <script lang="ts" setup>
+const { chooseImage, tempFiles, removeImage } = useChooseImage()
 const { setClipboard } = useCopy()
 const { phoneCall } = useCall()
+
+const form = ref({
+  description: '', // 罚款说明
+  priceNum: '', // 罚款金额
+  remake: '', // 备注
+})
 </script>
 
 <template>
@@ -18,17 +25,7 @@ const { phoneCall } = useCall()
         <view class="tips">
           对于一些需特殊处理的污渍，我们将收取少量的特殊处理费，以确保污渍得到妥善处理，恢复床上用品的整洁度。
         </view>
-        <view class="flex flex-col gap-10rpx mt-22rpx">
-          <view class="flex items-center justify-between text-24 text-#333 cell">
-            <view class="flex items-center label">
-              <view class="leading-none">
-                费用说明
-              </view>
-            </view>
-            <view class="text-#999">
-              小面积需特殊处理污损
-            </view>
-          </view>
+        <view class="flex flex-col gap-24rpx mt-22rpx leading-none">
           <view class="flex items-center justify-between text-24 text-#333 cell">
             <view class="flex items-center label">
               <view class="leading-none">
@@ -56,74 +53,88 @@ const { phoneCall } = useCall()
               </view>
             </view>
             <view class="mt-30rpx scroll-list">
-              <scroll-view scroll-x enable-flex class="w-full whitespace-nowrap">
-                <view class="flex gap-10rpx">
-                  <view class="flex-shrink-0">
-                    <image
-                      src="@/static/product-1.png"
-                      mode="aspectFill"
-                      class="w-194 h-194 rounded-18rpx"
-                    />
-                  </view>
-                  <view class="flex-shrink-0">
-                    <image
-                      src="@/static/product.png"
-                      mode="aspectFill"
-                      class="w-194 h-194 rounded-18rpx"
-                    />
-                  </view>
-                  <view class="flex-shrink-0">
-                    <image
-                      src="@/static/product-1.png"
-                      mode="aspectFill"
-                      class="w-194 h-194 rounded-18rpx"
-                    />
-                  </view>
-                  <view class="flex-shrink-0">
-                    <image
-                      src="@/static/product.png"
-                      mode="aspectFill"
-                      class="w-194 h-194 rounded-18rpx"
-                    />
-                  </view>
-                  <view class="flex-shrink-0">
-                    <image
-                      src="@/static/product-1.png"
-                      mode="aspectFill"
-                      class="w-194 h-194 rounded-18rpx"
-                    />
-                  </view>
-                  <view class="flex-shrink-0">
-                    <image
-                      src="@/static/product.png"
-                      mode="aspectFill"
-                      class="w-194 h-194 rounded-18rpx"
-                    />
+              <view class="grid grid-cols-3 gap-12rpx">
+                <!-- 上传块 -->
+                <view class="relative w-full h-0 pb-100% rounded-8rpx overflow-hidden" @click="chooseImage">
+                  <view class="absolute top-0 left-0 flex flex-center w-full h-full bg-[#EFEFEF]">
+                    <view class="i-fluent-scan-camera-20-regular text-80 text-[#B5B5B6]" />
                   </view>
                 </view>
-              </scroll-view>
-            </view>
-          </view>
-          <view class="flex items-center justify-between text-24 text-#333 cell">
-            <view class="flex items-center label">
-              <view class="leading-none">
-                支付金额
+                <!-- 展示块 -->
+                <view v-for="item in tempFiles" :key="item.tempFilePath" class="relative w-full h-0 pb-100% rounded-8rpx overflow-hidden">
+                  <view class="absolute top-0 left-0 flex flex-center w-full h-full bg-[#EFEFEF]">
+                    <image
+                      :src="item.tempFilePath"
+                      mode="aspectFill"
+                      class="w-full h-full"
+                    />
+                    <view class="absolute top-0 right-0 flex flex-center w-38 h-38 rounded-bl-8rpx bg-[red]" @click="removeImage(item.tempFilePath)">
+                      <view class="i-fluent-dismiss-16-regular text-24 text-[#fff]" />
+                    </view>
+                  </view>
+                </view>
               </view>
             </view>
-            <view class="text-#FC6565">
-              &yen;10
-            </view>
           </view>
-          <view class="flex items-center justify-between text-24 text-#333 cell">
-            <view class="flex items-center label">
-              <view class="leading-none">
-                备注
-              </view>
-            </view>
-            <view class="text-#999">
-              线下收款10元
-            </view>
+        </view>
+      </view>
+    </nut-cell>
+    <nut-cell>
+      <view class="flex items-center justify-between text-24 text-#333 w-full">
+        <view class="flex items-center label">
+          <view class="leading-none">
+            费用说明
           </view>
+        </view>
+        <view class="flex-1 pl-24rpx">
+          <nut-input
+            v-model="form.description"
+            :border="false"
+            placeholder="请输入费用说明（必填）"
+            clearable
+            custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+          />
+        </view>
+      </view>
+    </nut-cell>
+    <nut-cell>
+      <view class="flex items-center justify-between text-24 text-#333 w-full">
+        <view class="flex items-center label">
+          <view class="leading-none">
+            罚款金额
+          </view>
+        </view>
+        <view class="flex-1 pl-24rpx">
+          <nut-input
+            v-model="form.priceNum"
+            type="number"
+            :border="false"
+            placeholder="请输入罚款金额（必填）"
+            clearable
+            custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+          >
+            <template #right>
+              元
+            </template>
+          </nut-input>
+        </view>
+      </view>
+    </nut-cell>
+    <nut-cell>
+      <view class="flex items-center justify-between text-24 text-#333 w-full">
+        <view class="flex items-center label">
+          <view class="leading-none">
+            备注
+          </view>
+        </view>
+        <view class="flex-1 pl-24rpx">
+          <nut-input
+            v-model="form.remake"
+            :border="false"
+            placeholder="请输入备注"
+            clearable
+            custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+          />
         </view>
       </view>
     </nut-cell>
@@ -178,7 +189,7 @@ const { phoneCall } = useCall()
       </view>
     </nut-cell>
     <nut-button block custom-color="#ffaa00" custom-style="--nut-button-default-border-color: #ffaa00;">
-      支付
+      提交
     </nut-button>
   </view>
 </template>

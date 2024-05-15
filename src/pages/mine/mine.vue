@@ -37,7 +37,7 @@ const navigationList = ref([
     id: 4,
     title: '租赁服务详情',
     icon: 'i-fluent-apps-20-regular',
-    path: '',
+    path: '/pages/single/rich?id=1&title=租赁服务详情',
   },
   {
     id: 5,

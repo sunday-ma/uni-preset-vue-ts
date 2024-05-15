@@ -11,6 +11,8 @@ import type { DatePickerBaseEvent, DatePickerColumnType, PickerOption } from 'nu
 import { AirDateTime } from '@/common/airPower/helpers/AirDateTime'
 import type { IJson } from '@/common/airPower/intetface/IJson'
 
+const { setClipboard } = useCopy()
+
 /**
  * 获取禁用日期
  * @param filter 过滤星期几
@@ -80,20 +82,6 @@ function collectionTimeFilter(type: DatePickerColumnType, options: PickerOption[
     return options.filter(item => item?.value && +item?.value >= 9 && +item?.value <= 18)
 
   return options
-}
-/**
- * 复制订单编号
- */
-function handleCopyNo() {
-  uni.setClipboardData({
-    data: '1234567890',
-    success() {
-      uni.showToast({
-        title: '复制成功',
-        icon: 'none',
-      })
-    },
-  })
 }
 
 onLoad(() => {
@@ -267,7 +255,7 @@ onLoad(() => {
             </view>
           </view>
           <view class="text-#999">
-            123456789876543212345 | <text class="text-#FFAA00" @click="handleCopyNo">
+            123456789876543212345 | <text class="text-#FFAA00" @click="setClipboard('编号')">
               复制
             </text>
           </view>

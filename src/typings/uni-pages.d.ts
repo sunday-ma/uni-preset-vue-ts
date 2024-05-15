@@ -7,17 +7,24 @@ interface NavigateToOptions {
   url: "/pages/index/index" |
        "/pages/defaced/detail" |
        "/pages/defaced/list" |
-       "/pages/index/index copy" |
        "/pages/mine/mine" |
        "/pages/mine/settings" |
        "/pages/notice/index" |
+       "/pages/notice/site" |
        "/pages/order/detail" |
        "/pages/order/list" |
        "/pages/product/detail" |
        "/pages/product/pay" |
        "/pages/single/about" |
+       "/pages/single/rich" |
        "/pages/single/system" |
-       "/pages/site/site";
+       "/pages/site/site" |
+       "/pages-site/order/acceptance" |
+       "/pages-site/order/defaced" |
+       "/pages-site/order/defacedDetail" |
+       "/pages-site/order/detail" |
+       "/pages-site/order/issue" |
+       "/pages-site/order/refund";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

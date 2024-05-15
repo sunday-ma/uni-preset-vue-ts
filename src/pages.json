@@ -23,13 +23,6 @@
       }
     },
     {
-      "path": "pages/index/index copy",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "首页"
-      }
-    },
-    {
       "path": "pages/mine/mine",
       "type": "page",
       "style": {
@@ -45,6 +38,13 @@
     },
     {
       "path": "pages/notice/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "消息通知"
+      }
+    },
+    {
+      "path": "pages/notice/site",
       "type": "page",
       "style": {
         "navigationBarTitleText": "消息通知"
@@ -84,6 +84,10 @@
       "style": {
         "navigationBarTitleText": "关于我们"
       }
+    },
+    {
+      "path": "pages/single/rich",
+      "type": "page"
     },
     {
       "path": "pages/single/system",
@@ -131,5 +135,53 @@
       }
     ]
   },
-  "subPackages": []
+  "subPackages": [
+    {
+      "root": "pages-site",
+      "pages": [
+        {
+          "path": "order/acceptance",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "验收"
+          }
+        },
+        {
+          "path": "order/defaced",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "污损订单"
+          }
+        },
+        {
+          "path": "order/defacedDetail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "污损订单"
+          }
+        },
+        {
+          "path": "order/detail",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "订单详情"
+          }
+        },
+        {
+          "path": "order/issue",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "发放"
+          }
+        },
+        {
+          "path": "order/refund",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "退款单"
+          }
+        }
+      ]
+    }
+  ]
 }

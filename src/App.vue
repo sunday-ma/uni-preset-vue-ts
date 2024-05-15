@@ -100,4 +100,8 @@ view {
   font-size: 32rpx !important;
   color: #FFAA00;
 }
+
+::v-deep .component-empty .nut-empty__box {
+  height: auto !important;
+}
 </style>

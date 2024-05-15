@@ -143,6 +143,8 @@ function handleProductClick(data: any) {
     url: `${ProductEnum.DETAIL}?id=${data.id}`,
   })
 }
+
+onLoad(() => {})
 </script>
 
 <template>
@@ -211,7 +213,6 @@ function handleProductClick(data: any) {
         <view class="mt-36rpx">
           <mp-html content="<div>Hello World!</div>" />
         </view>
-        <view class="i-fluent:scan-dash-20-filled" />
       </view>
       <!-- #endregion 租赁规则 -->
     </view>

@@ -9,12 +9,15 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BfEmpty: typeof import('./../components/bf-empty/bf-empty.vue')['default']
     BfModuleHead: typeof import('./../components/bf-module-head/bf-module-head.vue')['default']
     BfProduct: typeof import('./../components/bf-product/bf-product.vue')['default']
+    BfSitePopup: typeof import('./../components/bf-site-popup/bf-site-popup.vue')['default']
     BfSkuPopup: typeof import('./../components/bf-sku-popup/bf-sku-popup.vue')['default']
     BfSwiper: typeof import('./../components/bf-swiper/bf-swiper.vue')['default']
     Component: typeof import('./../components/component/component.vue')['default']
     LoadImage: typeof import('./../components/load-image/load-image.vue')['default']
+    NutAnimate: typeof import('nutui-uniapp/components/animate/animate.vue')['default']
     NutAvatar: typeof import('nutui-uniapp/components/avatar/avatar.vue')['default']
     NutButton: typeof import('nutui-uniapp/components/button/button.vue')['default']
     NutCalendar: typeof import('nutui-uniapp/components/calendar/calendar.vue')['default']
@@ -28,7 +31,10 @@ declare module '@vue/runtime-core' {
     NutIcon: typeof import('nutui-uniapp/components/icon/icon.vue')['default']
     NutInput: typeof import('nutui-uniapp/components/input/input.vue')['default']
     NutPopup: typeof import('nutui-uniapp/components/popup/popup.vue')['default']
+    NutRadio: typeof import('nutui-uniapp/components/radio/radio.vue')['default']
+    NutRadioGroup: typeof import('nutui-uniapp/components/radiogroup/radiogroup.vue')['default']
     NutRate: typeof import('nutui-uniapp/components/rate/rate.vue')['default']
+    NutSwitch: typeof import('nutui-uniapp/components/switch/switch.vue')['default']
     NutTabPane: typeof import('nutui-uniapp/components/tabpane/tabpane.vue')['default']
     NutTabs: typeof import('nutui-uniapp/components/tabs/tabs.vue')['default']
     NutTag: typeof import('nutui-uniapp/components/tag/tag.vue')['default']

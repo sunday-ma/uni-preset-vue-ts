@@ -8,6 +8,8 @@
 
 <script lang="ts" setup>
 import mpHtml from 'mp-html/dist/uni-app/components/mp-html/mp-html'
+
+const { phoneCall } = useCall()
 </script>
 
 <template>
@@ -35,7 +37,7 @@ import mpHtml from 'mp-html/dist/uni-app/components/mp-html/mp-html'
           联系我们
         </view>
         <view class="flex flex-col items-center mt-24rpx">
-          <view class="text-28 text-#3E3A39 leading-relaxed">
+          <view class="text-28 text-#3E3A39 leading-relaxed" @click="phoneCall('114')">
             联系电话：<text class="text-#666">
               0531-1234 5678
             </text>
