@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import bfModuleHead from '@/components/bf-module-head/bf-module-head.vue'
 
-const { chooseImage, tempFiles, removeImage } = useChooseImage()
+const { chooseImage, tempFiles, removeImage } = useImage()
 const { phoneCall } = useCall()
 
 function handleIssue() {

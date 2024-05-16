@@ -7,37 +7,13 @@
 </route>
 
 <script lang="ts" setup>
-import type { DatePickerBaseEvent, DatePickerColumnType, PickerOption } from 'nutui-uniapp'
 import { AirDateTime } from '@/common/airPower/helpers/AirDateTime'
 import type { IJson } from '@/common/airPower/intetface/IJson'
+import bfCalendar from '@/components/bf-calendar/bf-calendar.vue'
+import bfDatePicker from '@/components/bf-date-picker/bf-date-picker.vue'
+import bfSite from '@/components/bf-site/bf-site.vue'
 
 const { setClipboard } = useCopy()
-
-/**
- * 获取禁用日期
- * @param filter 过滤星期几
- * @returns IJson
- */
-function getFilterDate(filter: number[] = [0, 6]) {
-  const filterDate = {} as IJson
-  const d = new Date(new Date())
-  let day = d.getDay()
-
-  for (let i = 0; i < 365; i++) {
-    if (filter.includes(day))
-      filterDate[`${d.getFullYear()}-${pad(d.getMonth() + 1, 2)}-${pad(d.getDate(), 2)}`] = true
-
-    d.setDate(d.getDate() + 1)
-    day = d.getDay()
-  }
-
-  return filterDate
-}
-
-function pad(n: number, width: number) {
-  const mouth = `${n}`
-  return mouth.length === width ? n : '0'.repeat(width - mouth.length) + n
-}
 
 const form = ref({
   name: '',
@@ -50,38 +26,70 @@ const form = ref({
 const termsStatus = ref(false)
 
 /**
+ * 服务点弹窗
+ */
+const siteRef = ref<InstanceType<typeof bfSite> | null>(null)
+const siteSolumns = ref([
+  {
+    text: '服务点1',
+    value: '1',
+  },
+  {
+    text: '服务点2',
+    value: '2',
+  },
+  {
+    text: '服务点3',
+    value: '3',
+  },
+  {
+    text: '服务点4',
+    value: '4',
+  },
+  {
+    text: '服务点5',
+    value: '5',
+  },
+  {
+    text: '服务点6',
+    value: '6',
+  },
+  {
+    text: '服务点7',
+    value: '7',
+  },
+  {
+    text: '服务点8',
+    value: '8',
+  },
+])
+function onSiteShow() {
+  siteRef.value?.showSite()
+}
+function onSiteConfirm(params: IJson[]) {
+  console.log('params', params)
+}
+
+/**
  * 预约领用年月日
  */
-const collectionDate = ref<string>('')
-const collectionIsVisible = ref(false)
-function handleCollectionValue(param: string[] | any) {
-  form.value.date = AirDateTime.formatFromDate(param[3], 'YYYY-MM-DD')
-  collectionIsVisible.value = false
+const calendar = ref<InstanceType<typeof bfCalendar> | null>(null)
+function onShowCalender() {
+  calendar.value?.showCollection()
 }
-function disabledDate(date: string) {
-  return getFilterDate()[date]
+function onCalendarConfirm(date: string) {
+  form.value.date = AirDateTime.formatFromDate(date, 'YYYY-MM-DD')
 }
 
 /**
  * 预约领用时间
  */
-const collectionTime = ref<Date>(new Date())
-const collectionTimeIsVisible = ref(false)
-function handleCollectionTimeValue(param: DatePickerBaseEvent) {
-  form.value.time = param.selectedValue.join(':')
-  collectionTimeIsVisible.value = false
+const datePicker = ref<InstanceType<typeof bfDatePicker> | null>(null)
+function onShowDatePicker() {
+  datePicker.value?.showCollectionTime()
 }
-/**
- * 预约领用时间过滤
- * @param type 类型
- * @param options 选项
- */
-function collectionTimeFilter(type: DatePickerColumnType, options: PickerOption[]) {
-  // TODO 过滤时间需要根据服务点的服务时间进行调整
-  if (type === 'hour')
-    return options.filter(item => item?.value && +item?.value >= 9 && +item?.value <= 18)
-
-  return options
+function onDatePickerConfirm(date: string) {
+  form.value.time = date
 }
 
 onLoad(() => {
@@ -108,7 +116,7 @@ onLoad(() => {
         <view class="flex-1 line-1 text">
           济南市槐荫区和谐广场二号楼...
         </view>
-        <view class="ml-44rpx text-#FFAA00">
+        <view class="ml-44rpx text-#FFAA00" @click="onSiteShow">
           更改服务点
         </view>
       </view>
@@ -158,7 +166,7 @@ onLoad(() => {
         </view>
         <view class="flex-1 line-1 text">
           <view class="flex items-center gap-30rpx ml-30rpx">
-            <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#F2F2F2" @click="collectionIsVisible = true">
+            <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#F2F2F2" @click="onShowCalender">
               <image
                 src="@/static/date.svg"
                 mode="widthFix"
@@ -166,7 +174,7 @@ onLoad(() => {
               />
               <view>{{ form.date || '请选择' }}</view>
             </view>
-            <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#F2F2F2" @click="collectionTimeIsVisible = true">
+            <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#F2F2F2" @click="onShowDatePicker">
               <image
                 src="@/static/time.svg"
                 mode="widthFix"
@@ -223,14 +231,6 @@ onLoad(() => {
         </view>
         <view class="flex items-center justify-between">
           <view class="tag">
-            优惠金额
-          </view>
-          <view class="text-#FC3C32">
-            减&yen;50
-          </view>
-        </view>
-        <view class="flex items-center justify-between">
-          <view class="tag">
             实付款
           </view>
           <view>&yen;200</view>
@@ -238,7 +238,9 @@ onLoad(() => {
         <view class="text-24rpx terms" style="--nut-primary-color: #ffaa00;--nut-checkbox-label-margin-left: 0;--nut-checkbox-margin-right: 14rpx;">
           <view class="flex items-center text-#FFAA00">
             <nut-checkbox v-model="termsStatus" icon-size="28rpx" />
-            <view>互信会员制度</view>
+            <view style="text-decoration: underline;">
+              互信会员制度
+            </view>
           </view>
           <view class="mt-1em text-#333">
             服务点营业时间：9:00 —— 18:00
@@ -328,7 +330,7 @@ onLoad(() => {
       </view>
       <view class="flex items-center btn-group">
         <nut-button plain>
-          取消订单
+          返回
         </nut-button>
         <view style="--nut-button-border-width: 0;" class="ml-38rpx">
           <nut-button custom-color="#FFAA00">
@@ -339,28 +341,18 @@ onLoad(() => {
     </view>
     <!-- #endregion Footer -->
 
+    <!-- #region 服务点弹窗 -->
+    <bf-site ref="siteRef" :data="siteSolumns" @confirm="onSiteConfirm" />
+    <!-- #endregion -->
+
     <!-- #region 日期选择 -->
-    <nut-calendar
-      v-model:visible="collectionIsVisible"
-      :default-value="collectionDate"
-      :is-auto-back-fill="true"
-      :disabled-date="disabledDate"
-      @close="collectionIsVisible = false"
-      @choose="handleCollectionValue"
-    />
+    <!-- :filter="[1, 2]" -->
+    <bf-calendar ref="calendar" @confirm="onCalendarConfirm" />
     <!-- #endregion -->
 
     <!-- #region 时间选择 -->
-    <nut-popup v-model:visible="collectionTimeIsVisible" position="bottom" safe-area-inset-bottom>
-      <nut-date-picker
-        v-model="collectionTime"
-        type="hour-minute"
-        title="时间选择"
-        :filter="collectionTimeFilter"
-        @confirm="handleCollectionTimeValue"
-        @cancel="collectionTimeIsVisible = false"
-      />
-    </nut-popup>
+    <!-- :filter="[8, 20]" -->
+    <bf-date-picker ref="datePicker" @confirm="onDatePickerConfirm" />
     <!-- #endregion -->
   </view>
 </template>

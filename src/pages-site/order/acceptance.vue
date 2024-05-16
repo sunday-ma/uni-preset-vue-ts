@@ -10,7 +10,7 @@
 import bfModuleHead from '@/components/bf-module-head/bf-module-head.vue'
 import bfSitePopup from '@/components/bf-site-popup/bf-site-popup.vue'
 
-const { chooseImage, tempFiles, removeImage } = useChooseImage()
+const { chooseImage, tempFiles, removeImage } = useImage()
 const { phoneCall } = useCall()
 
 /**
@@ -23,9 +23,6 @@ function qualified() {
 /**
  * 验收不合格
  */
-function unqualified() {
-
-}
 function qualifiedCancel() {
   console.log('稍后发放')
   qualifiedPopup.value?.onHidePopup()
@@ -49,6 +46,16 @@ function refundConfirm() {
   console.log('退款')
   refundPopup.value?.onHidePopup()
 }
+
+/**
+ * 验收是否合格
+ */
+const acceptanceStatus = ref('1')
+const form = ref({
+  description: '', // 罚款说明
+  priceNum: '', // 罚款金额
+  remake: '', // 备注
+})
 </script>
 
 <template>
@@ -57,11 +64,11 @@ function refundConfirm() {
       <!-- #region 订单信息 -->
       <view class="order-info">
         <nut-cell>
-          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
+          <view class="flex flex-col gap-30rpx w-100% text-24rpx">
             <view class="flex flex-col gap-24rpx w-100%">
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
-                  <view class="leading-none">
+                  <view>
                     领用人: 云暖阳
                   </view>
                 </view>
@@ -70,11 +77,11 @@ function refundConfirm() {
           </view>
         </nut-cell>
         <nut-cell>
-          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
+          <view class="flex flex-col gap-30rpx w-100% text-24rpx">
             <view class="flex flex-col gap-24rpx w-100%">
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
-                  <view class="leading-none" @click="phoneCall('114')">
+                  <view @click="phoneCall('114')">
                     领用人手机号：132 1234 5678
                   </view>
                 </view>
@@ -83,11 +90,11 @@ function refundConfirm() {
           </view>
         </nut-cell>
         <nut-cell>
-          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
+          <view class="flex flex-col gap-30rpx w-100% text-24rpx">
             <view class="flex flex-col gap-24rpx w-100%">
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
-                  <view class="leading-none">
+                  <view>
                     使用地址：济南市槐荫区暖阳云被中学 4栋202室
                   </view>
                 </view>
@@ -95,13 +102,9 @@ function refundConfirm() {
             </view>
           </view>
         </nut-cell>
-      </view>
-      <!-- #endregion -->
-
-      <!-- #region 验收记录 -->
-      <view class="record-list">
+        <!-- #region 验收记录 -->
         <nut-cell>
-          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none record-item">
+          <view class="flex flex-col gap-24rpx w-100% text-24rpx leading-none record-item">
             <bf-module-head title="验收记录" />
             <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
               <view class="flex items-center label">
@@ -143,6 +146,23 @@ function refundConfirm() {
                 济南市天桥区和谐广场银座2号楼
               </view>
             </view>
+            <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
+              <view class="flex items-center label">
+                <view class="leading-none">
+                  验收是否合格
+                </view>
+              </view>
+              <view class="text-#999">
+                <nut-radio-group v-model="acceptanceStatus" direction="horizontal">
+                  <nut-radio shape="button" label="1">
+                    合格
+                  </nut-radio>
+                  <nut-radio shape="button" label="2">
+                    不合格
+                  </nut-radio>
+                </nut-radio-group>
+              </view>
+            </view>
             <view class="text-24 text-#333 cell">
               <view class="flex items-center label">
                 <view class="leading-none">
@@ -175,29 +195,90 @@ function refundConfirm() {
             </view>
           </view>
         </nut-cell>
+        <!-- #endregion -->
+
+        <!-- #region 验收不合格 -->
+        <template v-if="acceptanceStatus === '2'">
+          <nut-cell>
+            <view class="flex items-center justify-between text-24 text-#333 w-full">
+              <view class="flex items-center label">
+                <view class="leading-none">
+                  费用说明:
+                </view>
+              </view>
+              <view class="flex-1 pl-24rpx">
+                <nut-input
+                  v-model="form.description"
+                  :border="false"
+                  placeholder="请输入费用说明（必填）"
+                  clearable
+                  custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+                />
+              </view>
+            </view>
+          </nut-cell>
+          <nut-cell>
+            <view class="flex items-center justify-between text-24 text-#333 w-full">
+              <view class="flex items-center label">
+                <view class="leading-none">
+                  污损费:
+                </view>
+              </view>
+              <view class="flex-1 pl-24rpx">
+                <nut-input
+                  v-model="form.priceNum"
+                  type="number"
+                  :border="false"
+                  placeholder="请输入污损费（必填）"
+                  clearable
+                  custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+                >
+                  <template #right>
+                    元
+                  </template>
+                </nut-input>
+              </view>
+            </view>
+          </nut-cell>
+          <nut-cell>
+            <view class="flex items-center justify-between text-24 text-#333 w-full">
+              <view class="flex items-center label">
+                <view class="leading-none">
+                  备注:
+                </view>
+              </view>
+              <view class="flex-1 pl-24rpx">
+                <nut-input
+                  v-model="form.remake"
+                  :border="false"
+                  placeholder="请输入备注"
+                  clearable
+                  custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+                />
+              </view>
+            </view>
+          </nut-cell>
+        </template>
+        <!-- #endregion -->
       </view>
       <!-- #endregion -->
 
       <!-- #region 验收 -->
-      <view class="flex justify-between mt-auto">
+      <view class="flex justify-between mt-60rpx">
         <nut-button
-          custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;width: 264rpx"
+          block
+          custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;"
           @click="qualified"
         >
           验收合格
         </nut-button>
         <nut-button
           v-if="false"
-          custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;width: 264rpx"
+          block
+          custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #ffaa00;"
           @click="refund"
         >
           验收合格
-        </nut-button>
-        <nut-button
-          custom-color="#FC3C32" custom-style="--nut-button-default-border-color: #FC3C32;width: 264rpx"
-          @click="unqualified"
-        >
-          验收不合格
         </nut-button>
       </view>
       <!-- #endregion -->
@@ -231,5 +312,23 @@ function refundConfirm() {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - env(safe-area-inset-bottom) * 2 + 40rpx);
+}
+
+::v-deep .order-info .nut-radio__button {
+  border-radius: 0;
+}
+
+::v-deep .order-info .nut-radio-group .nut-radio {
+  margin-bottom: 0 !important;
+}
+
+::v-deep .order-info .nut-radio-group--horizontal .nut-radio:last-child {
+  margin-right: 0 !important;
+}
+
+::v-deep .order-info .nut-radio__button--active {
+  background-color: #FFAA00;
+  color: #fff;
+  border-color: #ffaa00;
 }
 </style>

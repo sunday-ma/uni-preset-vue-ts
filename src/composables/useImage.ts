@@ -1,4 +1,4 @@
-export function useChooseImage() {
+export function useImage() {
   const tempFiles = ref<UniApp.MediaFile[]>([])
 
   function chooseImage() {
@@ -28,9 +28,17 @@ export function useChooseImage() {
     })
   }
 
+  function previewImage(current: number, urls: string[]) {
+    uni.previewImage({
+      current,
+      urls,
+    })
+  }
+
   return {
     chooseImage,
     removeImage,
+    previewImage,
     tempFiles,
   }
 }

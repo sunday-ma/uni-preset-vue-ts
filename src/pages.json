@@ -9,6 +9,13 @@
       }
     },
     {
+      "path": "pages/auth/login",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
       "path": "pages/defaced/detail",
       "type": "page",
       "style": {
@@ -148,13 +155,6 @@
         },
         {
           "path": "order/defaced",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "污损订单"
-          }
-        },
-        {
-          "path": "order/defacedDetail",
           "type": "page",
           "style": {
             "navigationBarTitleText": "污损订单"

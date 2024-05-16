@@ -5,6 +5,7 @@
 
 interface NavigateToOptions {
   url: "/pages/index/index" |
+       "/pages/auth/login" |
        "/pages/defaced/detail" |
        "/pages/defaced/list" |
        "/pages/mine/mine" |
@@ -21,7 +22,6 @@ interface NavigateToOptions {
        "/pages/site/site" |
        "/pages-site/order/acceptance" |
        "/pages-site/order/defaced" |
-       "/pages-site/order/defacedDetail" |
        "/pages-site/order/detail" |
        "/pages-site/order/issue" |
        "/pages-site/order/refund";

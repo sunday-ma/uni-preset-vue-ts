@@ -7,24 +7,29 @@
 </route>
 
 <script lang="ts" setup>
-// import { previewImage } from '@uni-helper/uni-promises'
 import bfModuleHead from '@/components/bf-module-head/bf-module-head.vue'
 import { useCall } from '@/composables/useCall'
 
 const { setClipboard } = useCopy()
 const { phoneCall } = useCall()
+// const { previewImage } = useImage()
 
 /**
  * 预览图片
  * @param current 当前显示图片的链接/索引值
  * @param urls 需要预览的图片链接列表
  */
+// TODO 未使用
 // function previewImageEvent(current: number, urls: string[]) {
-//   previewImage({
-//     current,
-//     urls,
-//   })
+//   previewImage(current, urls)
 // }
+
+const orderStatusColor = ref({
+  pending: '#FFAA00',
+  collected: '#09A6FF',
+  renting: '#D1E503',
+  refund: '#FC6565',
+})
 
 /**
  *
@@ -46,7 +51,12 @@ const themeVars = reactive({
       <view class="order-info">
         <nut-cell>
           <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
-            <bf-module-head title="订单信息" />
+            <view class="flex items-center justify-between">
+              <bf-module-head title="订单信息" />
+              <view class="text-28" :style="{ color: orderStatusColor.pending }">
+                待付款
+              </view>
+            </view>
             <view class="flex">
               <image
                 src="@/static/product-1.png"
@@ -120,6 +130,26 @@ const themeVars = reactive({
                   2024-04-27 10:50
                 </view>
               </view>
+              <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
+                <view class="flex items-center label">
+                  <view class="leading-none">
+                    退款金额
+                  </view>
+                </view>
+                <view class="text-#FC3C32">
+                  &yen;99
+                </view>
+              </view>
+              <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
+                <view class="flex items-center label">
+                  <view class="leading-none">
+                    退款说明
+                  </view>
+                </view>
+                <view class="text-#999">
+                  退款说明
+                </view>
+              </view>
             </view>
           </view>
         </nut-cell>
@@ -129,7 +159,7 @@ const themeVars = reactive({
       <!-- #region 最新记录 最近一次的发放或者验收记录，有哪个展示哪一个，仅展示一个 -->
       <view class="mt-24rpx" style="--nut-cell-padding: 13px 16px 48rpx 16px">
         <nut-cell>
-          <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
+          <view class="flex flex-col gap-24rpx w-100% text-24rpx leading-none">
             <bf-module-head title="发放记录" />
             <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
               <view class="flex items-center label">
@@ -228,13 +258,21 @@ const themeVars = reactive({
       >
         <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none">
           <bf-module-head title="发放验收记录" />
-          <nut-collapse v-model="collapseActive" :accordion="true" @change="handleCollapseChange">
-            <nut-collapse-item :name="1">
+          <nut-collapse
+            v-model="collapseActive"
+            :accordion="true"
+            custom-style="--nut-collapse-item-padding: 13px 28rpx;"
+            @change="handleCollapseChange"
+          >
+            <nut-collapse-item
+              :name="1"
+              custom-style="--nut-collapse-wrapper-content-padding: 13px 28rpx;"
+            >
               <template #title>
                 第1次发放验收记录
               </template>
               <view class="flex flex-col record-list">
-                <view class="flex flex-col gap-30rpx w-100% text-24rpx leading-none record-item">
+                <view class="flex flex-col gap-24rpx w-100% text-24rpx leading-none record-item">
                   <bf-module-head title="验收记录" />
                   <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                     <view class="flex items-center label">
@@ -334,7 +372,7 @@ const themeVars = reactive({
                   <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                     <view class="flex items-center label">
                       <view class="leading-none">
-                        罚款原因
+                        费用说明
                       </view>
                     </view>
                     <view class="text-#999">
@@ -344,7 +382,7 @@ const themeVars = reactive({
                   <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                     <view class="flex items-center label">
                       <view class="leading-none">
-                        罚款金额
+                        污损费
                       </view>
                     </view>
                     <view class="text-#999">
@@ -354,7 +392,7 @@ const themeVars = reactive({
                   <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                     <view class="flex items-center label">
                       <view class="leading-none">
-                        罚款单支付状态
+                        污损单支付状态
                       </view>
                     </view>
                     <view class="text-#8FC31F">

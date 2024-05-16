@@ -92,6 +92,7 @@ declare global {
   const useCounterStore2: typeof import('../stores/counter2')['useCounterStore2']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useImage: typeof import('../composables/useImage')['useImage']
   const useSlots: typeof import('vue')['useSlots']
   const useToast: typeof import('nutui-uniapp/composables')['useToast']
   const watch: typeof import('vue')['watch']

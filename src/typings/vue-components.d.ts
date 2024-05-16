@@ -9,9 +9,12 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BfCalendar: typeof import('./../components/bf-calendar/bf-calendar.vue')['default']
+    BfDatePicker: typeof import('./../components/bf-date-picker/bf-date-picker.vue')['default']
     BfEmpty: typeof import('./../components/bf-empty/bf-empty.vue')['default']
     BfModuleHead: typeof import('./../components/bf-module-head/bf-module-head.vue')['default']
     BfProduct: typeof import('./../components/bf-product/bf-product.vue')['default']
+    BfSite: typeof import('./../components/bf-site/bf-site.vue')['default']
     BfSitePopup: typeof import('./../components/bf-site-popup/bf-site-popup.vue')['default']
     BfSkuPopup: typeof import('./../components/bf-sku-popup/bf-sku-popup.vue')['default']
     BfSwiper: typeof import('./../components/bf-swiper/bf-swiper.vue')['default']
@@ -30,10 +33,10 @@ declare module '@vue/runtime-core' {
     NutDatePicker: typeof import('nutui-uniapp/components/datepicker/datepicker.vue')['default']
     NutIcon: typeof import('nutui-uniapp/components/icon/icon.vue')['default']
     NutInput: typeof import('nutui-uniapp/components/input/input.vue')['default']
+    NutPicker: typeof import('nutui-uniapp/components/picker/picker.vue')['default']
     NutPopup: typeof import('nutui-uniapp/components/popup/popup.vue')['default']
     NutRadio: typeof import('nutui-uniapp/components/radio/radio.vue')['default']
     NutRadioGroup: typeof import('nutui-uniapp/components/radiogroup/radiogroup.vue')['default']
-    NutRate: typeof import('nutui-uniapp/components/rate/rate.vue')['default']
     NutSwitch: typeof import('nutui-uniapp/components/switch/switch.vue')['default']
     NutTabPane: typeof import('nutui-uniapp/components/tabpane/tabpane.vue')['default']
     NutTabs: typeof import('nutui-uniapp/components/tabs/tabs.vue')['default']

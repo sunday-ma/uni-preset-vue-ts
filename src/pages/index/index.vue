@@ -48,6 +48,11 @@ function handleBannerEvent(data: IBanner) {
 }
 
 /**
+ * 领用/换租/归还码弹窗
+ */
+const showBasicQrcode = ref(false)
+const showBasic = ref(false)
+/**
  * 金刚区
  */
 const kingKongData = ref([
@@ -85,6 +90,8 @@ function handleKingKongEvent(data: {
   path: string
 }) {
   console.log(data)
+  // showBasicQrcode.value = true
+  showBasic.value = true
 }
 
 /**
@@ -199,7 +206,7 @@ onLoad(() => {})
 
       <!-- #region 热销款式 -->
       <view class="module hot">
-        <bf-module-head title="热销款式" more-text="查看全部" @click="handleModuleMoreEvent('hot')" />
+        <bf-module-head title="热销款式" />
         <view class="mt-36rpx">
           <bf-product :data="hotStyleData" :cols="2" :gap-x="12" :gap-y="26" @click="handleProductClick" />
           <view class="grid grid-cols-2 gap-x-12rpx gap-y-26rpx" />
@@ -217,11 +224,135 @@ onLoad(() => {})
       <!-- #endregion 租赁规则 -->
     </view>
     <!-- #endregion 主体内容 -->
+
+    <!-- #region 领用/换租/归还码二维码弹窗 -->
+    <nut-popup v-model:visible="showBasicQrcode" :custom-style="{ width: '694rpx', borderRadius: '18rpx' }">
+      <view class="flex flex-col items-center king-kong-popup">
+        <view class="i-carbon-close-large king-kong-icon" @click="showBasicQrcode = false" />
+        <!-- 直接展示二维码 -->
+        <nut-animate type="ripple">
+          <view class="flex flex-center w-148 h-148 mt-20rpx rounded-full bg-#ffaa00">
+            <image
+              src="@/static/notice/return.svg"
+              mode="aspectFit"
+              class="w-95 h-95"
+            />
+          </view>
+        </nut-animate>
+        <view class="mt-20rpx text-36 text-[#66421E]">
+          换租码
+        </view>
+        <view class="w-438 h-438 p-16rpx mt-35rpx rounded-18rpx bg-#ffaa00">
+          <view class="w-406 h-406 p-20rpx rounded-18rpx bg-[#fff]">
+            <image
+              src="@/static/product.png"
+              class="w-full h-full"
+            />
+          </view>
+        </view>
+        <view class="mt-30rpx text-24 text-[#666]">
+          请将此码出示给服务点工作人员
+        </view>
+      </view>
+    </nut-popup>
+    <!-- #endregion -->
+
+    <!-- #region 领用/换租/归还码列表弹窗 -->
+    <nut-popup v-model:visible="showBasic" :custom-style="{ width: '694rpx', borderRadius: '18rpx' }">
+      <view class="flex flex-col items-center king-kong-popup">
+        <view class="i-carbon-close-large king-kong-icon" @click="showBasic = false" />
+        <view class="mt-20rpx text-36 text-[#66421E]">
+          请选择您要换租的订单
+        </view>
+        <!-- 列表 -->
+        <scroll-view scroll-y enable-flex style="height: 600rpx; margin-top: 48rpx;">
+          <view class="flex flex-col gap-24rpx">
+            <view class="flex px-28rpx py-26rpx rounded-18rpx border border-[#DCDDDD] border-style-solid">
+              <image
+                src="@/static/product.png"
+                mode="aspectFill"
+                class="w-150 h-150 rounded-18rpx"
+              />
+              <view class="flex flex-col flex-1 py-16rpx pl-24rpx">
+                <view class="flex items-center justify-between text-28 text-[#333]">
+                  <view>订单A</view>
+                  <view>&yen;55</view>
+                </view>
+                <view class="mt-auto text-18 text-[#999]">
+                  黄色；150cm*210cm；9次
+                </view>
+              </view>
+            </view>
+            <view class="flex px-28rpx py-26rpx rounded-18rpx border border-[#DCDDDD] border-style-solid">
+              <image
+                src="@/static/product.png"
+                mode="aspectFill"
+                class="w-150 h-150 rounded-18rpx"
+              />
+              <view class="flex flex-col flex-1 py-16rpx pl-24rpx">
+                <view class="flex items-center justify-between text-28 text-[#333]">
+                  <view>订单A</view>
+                  <view>&yen;55</view>
+                </view>
+                <view class="mt-auto text-18 text-[#999]">
+                  黄色；150cm*210cm；9次
+                </view>
+              </view>
+            </view>
+            <view class="flex px-28rpx py-26rpx rounded-18rpx border border-[#DCDDDD] border-style-solid">
+              <image
+                src="@/static/product.png"
+                mode="aspectFill"
+                class="w-150 h-150 rounded-18rpx"
+              />
+              <view class="flex flex-col flex-1 py-16rpx pl-24rpx">
+                <view class="flex items-center justify-between text-28 text-[#333]">
+                  <view>订单A</view>
+                  <view>&yen;55</view>
+                </view>
+                <view class="mt-auto text-18 text-[#999]">
+                  黄色；150cm*210cm；9次
+                </view>
+              </view>
+            </view>
+            <view class="flex px-28rpx py-26rpx rounded-18rpx border border-[#DCDDDD] border-style-solid">
+              <image
+                src="@/static/product.png"
+                mode="aspectFill"
+                class="w-150 h-150 rounded-18rpx"
+              />
+              <view class="flex flex-col flex-1 py-16rpx pl-24rpx">
+                <view class="flex items-center justify-between text-28 text-[#333]">
+                  <view>订单A</view>
+                  <view>&yen;55</view>
+                </view>
+                <view class="mt-auto text-18 text-[#999]">
+                  黄色；150cm*210cm；9次
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </nut-popup>
+    <!-- #endregion -->
   </view>
 </template>
 
 <style lang="scss" scoped>
 .module {
   --at-apply: px-28rpx py-36rpx mt-24rpx bg-#fff rounded-18rpx;
+}
+.king-kong-popup {
+  position: relative;
+  padding: 46rpx 28rpx;
+
+  .king-kong-icon {
+    position: absolute;
+    top: 28rpx;
+    right: 28rpx;
+    font-size: 32rpx;
+    color: #FFAA00;
+  }
 }
 </style>

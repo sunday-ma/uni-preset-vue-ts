@@ -96,405 +96,370 @@ import { AirDateTime } from '@/common/airPower/helpers/AirDateTime'
 //   },
 // ])
 
-const tabsList = ref([
-  {
-    id: 1,
-    title: '全部',
-    total: 1,
-  },
-  {
-    id: 2,
-    title: '未读',
-    total: 2,
-  },
-  {
-    id: 3,
-    title: '已读',
-    total: 3,
-  },
-])
-const tabsState = ref(1)
-
 onLoad(() => {
 })
 </script>
 
 <template>
-  <view class="page">
-    <nut-tabs v-model="tabsState" background="#fff">
-      <template #titles>
-        <div class="title-list">
-          <view
-            v-for="item in tabsList" :key="item.id" class="title-item"
-            :class="{ 'tabs-active': tabsState === item.id }" @click="tabsState = item.id"
-          >
-            <view>
-              {{ item.title }} ({{ item.total }})
+  <view class="px-28rpx pt-26rpx page">
+    <!-- #region 消息通知列表 -->
+    <!-- TODO 没有消息通知了 -->
+    <view class="notice-list">
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
+          <image
+            src="@/static/notice/collar.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              领用通知
             </view>
-            <view class="item__line" />
-          </view>
-        </div>
-      </template>
-      <nut-tab-pane v-for="item in tabsList" :key="item.id" :pane-key="item.id">
-        <!-- #region 消息通知列表 -->
-        <view class="notice-list">
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
-              <image
-                src="@/static/notice/collar.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  领用通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
             </view>
           </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
-              <image
-                src="@/static/notice/lease.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  换租通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
-              <image
-                src="@/static/notice/return.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  归还通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
-              <image
-                src="@/static/notice/msg.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  消息通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
-              <image
-                src="@/static/notice/collar.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  领用通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
-              <image
-                src="@/static/notice/lease.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  换租通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
-              <image
-                src="@/static/notice/return.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  归还通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
-              <image
-                src="@/static/notice/msg.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  消息通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
-              <image
-                src="@/static/notice/collar.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  领用通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
-              <image
-                src="@/static/notice/lease.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  换租通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
-              <image
-                src="@/static/notice/return.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  归还通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
-              <image
-                src="@/static/notice/msg.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  消息通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
-              <image
-                src="@/static/notice/collar.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  领用通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
-              <image
-                src="@/static/notice/lease.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  换租通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
-              <image
-                src="@/static/notice/return.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  归还通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
-          </view>
-          <view class="flex items-center py-30rpx notice-item">
-            <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
-              <image
-                src="@/static/notice/msg.svg"
-                mode="widthFix"
-                class="w-50"
-              />
-            </view>
-            <view class="flex-1 ml-24rpx wrap">
-              <view class="flex items-center justify-between">
-                <view class="text-26 text-#333">
-                  消息通知
-                </view>
-                <view class="text-24 text-#999">
-                  {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
-                </view>
-              </view>
-              <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
-                您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
-              </view>
-            </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
           </view>
         </view>
-        <!-- <bf-empty type="notice" /> -->
-        <!-- #engregion 消息通知列表 -->
-      </nut-tab-pane>
-    </nut-tabs>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
+          <image
+            src="@/static/notice/lease.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              换租通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
+          <image
+            src="@/static/notice/return.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              归还通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
+          <image
+            src="@/static/notice/msg.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              消息通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
+          <image
+            src="@/static/notice/collar.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              领用通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
+          <image
+            src="@/static/notice/lease.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              换租通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
+          <image
+            src="@/static/notice/return.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              归还通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
+          <image
+            src="@/static/notice/msg.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              消息通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
+          <image
+            src="@/static/notice/collar.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              领用通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
+          <image
+            src="@/static/notice/lease.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              换租通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
+          <image
+            src="@/static/notice/return.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              归还通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
+          <image
+            src="@/static/notice/msg.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              消息通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FFAA00 icon">
+          <image
+            src="@/static/notice/collar.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              领用通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#89D5EF icon">
+          <image
+            src="@/static/notice/lease.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              换租通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#D8D850 icon">
+          <image
+            src="@/static/notice/return.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              归还通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+      <view class="flex items-center py-30rpx notice-item">
+        <view class="flex flex-center w-95 h-95 rounded-full bg-#FF886C icon">
+          <image
+            src="@/static/notice/msg.svg"
+            mode="widthFix"
+            class="w-50"
+          />
+        </view>
+        <view class="flex-1 ml-24rpx wrap">
+          <view class="flex items-center justify-between">
+            <view class="text-26 text-#333">
+              消息通知
+            </view>
+            <view class="text-24 text-#999">
+              {{ AirDateTime.formatFromMilliSecond(1715141148000, 'YYYY/MM/DD HH:mm:ss') }}
+            </view>
+          </view>
+          <view class="mt-12rpx text-24 text-#666 leading-1.4em line-2">
+            您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取您的**订单，**年*月*日可到**服务点领取
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <bf-empty type="notice" /> -->
+    <!-- #engregion 消息通知列表 -->
   </view>
 </template>
 

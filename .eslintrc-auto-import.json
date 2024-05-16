@@ -103,6 +103,7 @@
     "useToast": true,
     "useChooseImage": true,
     "useCopy": true,
-    "useCall": true
+    "useCall": true,
+    "useImage": true
   }
 }

@@ -9,11 +9,11 @@
 <script lang="ts" setup>
 import { ORDERSTATUS } from '@/common/orderStatus'
 
-function toDetail() {
-  uni.navigateTo({
-    url: '/pages-site/order/defacedDetail',
-  })
-}
+// function toDetail() {
+//   uni.navigateTo({
+//     url: '/pages-site/order/defacedDetail',
+//   })
+// }
 </script>
 
 <template>
@@ -54,7 +54,7 @@ function toDetail() {
               </view>
             </view>
           </view>
-          <view class="flex justify-end mt-26rpx">
+          <!-- <view class="flex justify-end mt-26rpx">
             <nut-button
               plain
               custom-color="#FC6565"
@@ -62,22 +62,9 @@ function toDetail() {
             >
               查看污损订单
             </nut-button>
-          </view>
+          </view> -->
         </view>
       </nut-cell>
-    </view>
-
-    <view class="btn">
-      <nut-button
-        block
-        custom-color="#FC6565"
-        custom-style="--nut-button-default-border-color: #FC6565;"
-      >
-        <template #icon>
-          <nut-icon name="uploader" />
-        </template>
-        发起污损订单
-      </nut-button>
     </view>
   </view>
 </template>

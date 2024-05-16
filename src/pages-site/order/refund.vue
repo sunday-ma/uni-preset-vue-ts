@@ -25,6 +25,11 @@ function refundConfirm() {
   refundPopup.value?.onHidePopup()
 }
 
+const form = ref({
+  priceNum: '', // 实际金额
+  remake: '', // 备注
+})
+
 const themeVars = reactive({
   buttonDefaultPadding: '0 24rpx',
 })
@@ -128,7 +133,7 @@ const themeVars = reactive({
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
                   <view class="leading-none">
-                    剩余换租次数
+                    剩余服务次数
                   </view>
                 </view>
                 <view>
@@ -148,7 +153,7 @@ const themeVars = reactive({
               <view class="flex items-center justify-between w-100% text-24 text-#333 cell">
                 <view class="flex items-center label">
                   <view class="leading-none">
-                    退款金额
+                    可退款金额
                   </view>
                 </view>
                 <view>
@@ -194,18 +199,59 @@ const themeVars = reactive({
             </view>
           </view>
         </nut-cell>
+        <nut-cell>
+          <view class="flex items-center justify-between text-24 text-#333 w-full">
+            <view class="flex items-center label">
+              <view class="leading-none">
+                实际退款金额:
+              </view>
+            </view>
+            <view class="flex-1 pl-24rpx">
+              <nut-input
+                v-model="form.priceNum"
+                type="number"
+                :border="false"
+                placeholder="请输入退款金额（必填）"
+                clearable
+                custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+              >
+                <template #right>
+                  元
+                </template>
+              </nut-input>
+            </view>
+          </view>
+        </nut-cell>
+        <nut-cell>
+          <view class="flex items-center justify-between text-24 text-#333 w-full">
+            <view class="flex items-center label">
+              <view class="leading-none">
+                备注:
+              </view>
+            </view>
+            <view class="flex-1 pl-24rpx">
+              <nut-input
+                v-model="form.remake"
+                :border="false"
+                placeholder="请输入备注"
+                clearable
+                custom-style="--nut-input-padding: 0; font-size: 24rpx;"
+              />
+            </view>
+          </view>
+        </nut-cell>
       </view>
       <!-- #endregion -->
 
       <!-- #region 底部 -->
-      <view class="mt-auto">
+      <view class="mt-60rpx">
         <view class="mb-1em text-24 text-[#FC6565] text-center">
           *有未支付的罚款订单，请联系用户支付后退款
         </view>
+        <!-- disabled -->
         <nut-button
           block
           custom-color="#FFAA00" custom-style="--nut-button-default-border-color: #FFAA00;"
-          disabled
           @click="refund"
         >
           退款

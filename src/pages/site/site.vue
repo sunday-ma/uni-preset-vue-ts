@@ -15,7 +15,6 @@ const { phoneCall } = useCall()
 /**
  * 用户端服务点数据
  */
-const value = ref(1)
 const userData = reactive({
   tabsList: [
     {
@@ -24,7 +23,7 @@ const userData = reactive({
     },
     {
       id: 2,
-      title: '收藏/常去',
+      title: '常去',
     },
   ],
   tabsState: 1,
@@ -41,12 +40,12 @@ const serviceData = reactive({
     },
     {
       id: 2,
-      title: '待付款',
+      title: '待支付',
     },
-    {
-      id: 3,
-      title: '待领用',
-    },
+    // {
+    //   id: 3,
+    //   title: '待领用',
+    // },
     {
       id: 4,
       title: '租用中',
@@ -127,12 +126,6 @@ function toDetail() {
                 <view class="flex p-28rpx rounded-18rpx text-0 item">
                   <view class="relative rounded-8rpx overflow-hidden">
                     <image src="@/static/site.jpg" mode="aspectFill" class="w-150 h-150 rounded-18rpx" />
-                    <view
-                      class="absolute top-0 left-0 flex flex-center w-40 h-40"
-                      style="border-top-left-radius: 8rpx; border-bottom-right-radius: 8rpx; background-color: rgba(0, 0, 0, .4);"
-                    >
-                      <nut-rate v-model="value" size="24rpx" active-color="#ffaa00" :count="1" />
-                    </view>
                   </view>
                   <view class="pl-26rpx info">
                     <view class="text-28 text-[#333]">
@@ -159,12 +152,6 @@ function toDetail() {
                 <view class="flex p-28rpx rounded-18rpx text-0 item">
                   <view class="relative rounded-8rpx overflow-hidden">
                     <image src="@/static/site.jpg" mode="aspectFill" class="w-150 h-150 rounded-18rpx" />
-                    <view
-                      class="absolute top-0 left-0 flex flex-center w-40 h-40"
-                      style="border-top-left-radius: 8rpx; border-bottom-right-radius: 8rpx; background-color: rgba(0, 0, 0, .4);"
-                    >
-                      <nut-rate v-model="value" size="24rpx" active-color="#ffaa00" :count="1" />
-                    </view>
                   </view>
                   <view class="pl-26rpx info">
                     <view class="text-28 text-[#333]">
@@ -198,7 +185,7 @@ function toDetail() {
     <!-- #endregion -->
 
     <!-- #region 服务端服务点 -->
-    <view class="service">
+    <view v-else class="service">
       <view class="header">
         <view class="flex items-center gap-12rpx px-28rpx py-16rpx search">
           <nut-input
@@ -709,7 +696,7 @@ function toDetail() {
 ::v-deep .search-popup .nut-radio__button--active {
   background-color: #FFAA00;
   color: #fff;
-  border: none;
+  border-color: #ffaa00;
 }
 
 ::v-deep .search-popup .nut-radio__label {

@@ -7,6 +7,12 @@
 </route>
 
 <script lang="ts" setup>
+import { AirDateTime } from '@/common/airPower/helpers/AirDateTime'
+import type { IJson } from '@/common/airPower/intetface/IJson'
+import bfSite from '@/components/bf-site/bf-site.vue'
+import bfCalendar from '@/components/bf-calendar/bf-calendar.vue'
+import bfDatePicker from '@/components/bf-date-picker/bf-date-picker.vue'
+
 const tabsList = ref([
   {
     id: 1,
@@ -16,17 +22,17 @@ const tabsList = ref([
     id: 2,
     title: '待付款',
   },
-  {
-    id: 3,
-    title: '待领用',
-  },
+  // {
+  //   id: 3,
+  //   title: '待领用',
+  // },
   {
     id: 4,
     title: '租用中',
   },
   {
     id: 5,
-    title: '退款售后',
+    title: '已完成',
   },
 ])
 const tabsState = ref(1)
@@ -52,6 +58,87 @@ function handleDefacedEvent() {
  * 归还/换租弹窗
  */
 const showMainPopuo = ref(false)
+
+/**
+ * 服务点弹窗
+ */
+const siteRef = ref<InstanceType<typeof bfSite> | null>(null)
+const siteSolumns = ref([
+  {
+    text: '服务点1',
+    value: '1',
+  },
+  {
+    text: '服务点2',
+    value: '2',
+  },
+  {
+    text: '服务点3',
+    value: '3',
+  },
+  {
+    text: '服务点4',
+    value: '4',
+  },
+  {
+    text: '服务点5',
+    value: '5',
+  },
+  {
+    text: '服务点6',
+    value: '6',
+  },
+  {
+    text: '服务点7',
+    value: '7',
+  },
+  {
+    text: '服务点8',
+    value: '8',
+  },
+])
+function onSiteShow() {
+  showMainPopuo.value = false
+  siteRef.value?.showSite()
+}
+function onSiteHide() {
+  showMainPopuo.value = true
+}
+function onSiteConfirm(params: IJson[]) {
+  console.log('params', params)
+}
+
+/**
+ * 预约领用年月日
+ */
+const calendar = ref<InstanceType<typeof bfCalendar> | null>(null)
+function onShowCalender() {
+  showMainPopuo.value = false
+  calendar.value?.showCollection()
+}
+function onCalendarCancel() {
+  showMainPopuo.value = true
+}
+function onCalendarConfirm(date: string) {
+  showMainPopuo.value = true
+  console.log('日期选择', AirDateTime.formatFromDate(date, 'YYYY-MM-DD'))
+}
+
+/**
+ * 预约领用时间
+ */
+const datePicker = ref<InstanceType<typeof bfDatePicker> | null>(null)
+function onShowDatePicker() {
+  showMainPopuo.value = false
+  datePicker.value?.showCollectionTime()
+}
+function onDatePickerCancel() {
+  showMainPopuo.value = true
+}
+function onDatePickerConfirm(date: string) {
+  showMainPopuo.value = true
+  console.log('时间选择', date)
+}
 </script>
 
 <template>
@@ -186,18 +273,18 @@ const showMainPopuo = ref(false)
           换租
         </view>
         <view class="flex flex-col gap-20rpx text-28 text-#3E3A39 w-full mt-58rpx list">
-          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 item">
+          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 leading-none item" @click="onSiteShow">
             <view>服务点：</view>
             <view class="flex-1 line-1">
               济南市槐荫区和谐广场银座中心2#806室
             </view>
             <view class="i-carbon-chevron-right ml-a text-40 text-#3E3A39" />
           </view>
-          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 item">
+          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 leading-none item">
             <view>预约换租时间:</view>
             <view class="flex-1">
               <view class="flex items-center gap-30rpx ml-30rpx">
-                <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#fff">
+                <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#fff" @click="onShowCalender">
                   <image
                     src="@/static/date.svg"
                     mode="widthFix"
@@ -205,7 +292,7 @@ const showMainPopuo = ref(false)
                   />
                   <view>{{ '请选择' }}</view>
                 </view>
-                <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#fff">
+                <view class="flex items-center px-18rpx py-14rpx rounded-10rpx bg-#fff" @click="onShowDatePicker">
                   <image
                     src="@/static/time.svg"
                     mode="widthFix"
@@ -216,7 +303,7 @@ const showMainPopuo = ref(false)
               </view>
             </view>
           </view>
-          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 item">
+          <view class="flex items-center px-30rpx py-34rpx rounded-18rpx bg-#F9F9F9 leading-none item">
             <view>剩余次数：</view>
             <view>8/9 次</view>
           </view>
@@ -241,12 +328,17 @@ const showMainPopuo = ref(false)
     <!-- #endregion -->
 
     <!-- #region 服务点弹窗 -->
+    <bf-site ref="siteRef" :data="siteSolumns" @confirm="onSiteConfirm" @cancel="onSiteHide" />
     <!-- #endregion -->
 
-    <!-- #region 预约归还/换租日期 -->
+    <!-- #region 日期选择 -->
+    <!-- :filter="[1, 2]" -->
+    <bf-calendar ref="calendar" @confirm="onCalendarConfirm" @cancel="onCalendarCancel" />
     <!-- #endregion -->
 
-    <!-- #region 预约归还/换租时间 -->
+    <!-- #region 时间选择 -->
+    <!-- :filter="[8, 20]" -->
+    <bf-date-picker ref="datePicker" @confirm="onDatePickerConfirm" @cancel="onDatePickerCancel" />
     <!-- #endregion -->
   </nut-config-provider>
 </template>
