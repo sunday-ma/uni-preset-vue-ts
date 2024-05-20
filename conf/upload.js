@@ -1,17 +1,32 @@
 const process = require('node:process')
 const ci = require('miniprogram-ci')
+const simpleGit = require('simple-git')
+let { version } = require('../package.json')
 
+const git = simpleGit()
 // 微信小程序构建发布 https://help.aliyun.com/document_detail/202392.html?spm=a2c6h.13066369.question.13.775c819f4jRCbD
 
 /* eslint import/newline-after-import: "off" */
-;(async () => {
+; (async () => {
+  const log = await git.log()
+  let desc = log.latest.message
+
+  if (!version)
+    version = 'v1.0.0'
+
+  if (!desc)
+    desc = `${new Date()}上传`
+  console.log('version:', version)
+  console.log('desc:', desc)
+  return false
+
   const project = new ci.Project({
     appid: 'wx1be960bc06f8c221',
     type: 'miniProgram',
-    projectPath: process.cwd(),
+    projectPath: `${process.cwd()}/dist/build/mp-weixin/`,
     privateKeyPath: `${process.cwd()}/conf/private.wx1be960bc06f8c221.key`,
-    // ignores: ['node_modules/**/*'],
-    ignores: [''],
+    ignores: ['node_modules/**/*'],
+    // ignores: [''],
   })
   try {
     const uploadResult = await ci.upload({
@@ -19,7 +34,7 @@ const ci = require('miniprogram-ci')
       version,
       desc,
       setting: {
-        es6: true,
+        // es6: true,
         minify: true,
       },
       onProgressUpdate: console.log,
