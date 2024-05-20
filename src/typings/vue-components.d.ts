@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     NutCollapse: typeof import('nutui-uniapp/components/collapse/collapse.vue')['default']
     NutCollapseItem: typeof import('nutui-uniapp/components/collapseitem/collapseitem.vue')['default']
     NutConfigProvider: typeof import('nutui-uniapp/components/configprovider/configprovider.vue')['default']
+    NutCountdown: typeof import('nutui-uniapp/components/countdown/countdown.vue')['default']
     NutDatePicker: typeof import('nutui-uniapp/components/datepicker/datepicker.vue')['default']
     NutIcon: typeof import('nutui-uniapp/components/icon/icon.vue')['default']
     NutInput: typeof import('nutui-uniapp/components/input/input.vue')['default']

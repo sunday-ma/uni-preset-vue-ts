@@ -14,6 +14,7 @@ import bfSwiper from '@/components/bf-swiper/bf-swiper.vue'
 import bfModuleHead from '@/components/bf-module-head/bf-module-head.vue'
 
 import { ProductEnum } from '@/common/router'
+import { PRODUCT } from '@/apis'
 
 /**
  * 轮播图
@@ -147,11 +148,15 @@ const hotStyleData = ref([
 
 function handleProductClick(data: any) {
   uni.navigateTo({
-    url: `${ProductEnum.DETAIL}?id=${data.id}`,
+    url: `${ProductEnum.DETAIL}?no=${data.no}`,
   })
 }
 
-onLoad(() => {})
+onLoad(() => {
+  PRODUCT.lists().then((res) => {
+    hotStyleData.value = res.result
+  })
+})
 </script>
 
 <template>

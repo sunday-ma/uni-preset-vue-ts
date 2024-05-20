@@ -1,7 +1,7 @@
 export interface IResponseType<P = any> {
   code: number
   msg: string
-  data: P
+  result: P
 }
 
 export interface IAwesomeInterface {

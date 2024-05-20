@@ -11,6 +11,8 @@ import mpHtml from 'mp-html/dist/uni-app/components/mp-html/mp-html'
 import bfSwiper from '@/components/bf-swiper/bf-swiper.vue'
 import bfSkuPopup from '@/components/bf-sku-popup/bf-sku-popup.vue'
 
+import { PRODUCT } from '@/apis'
+
 /**
  * 轮播图
  */
@@ -73,7 +75,10 @@ function showSkuPopup() {
 }
 
 onLoad((options) => {
-  console.log('onLoad', options?.id)
+  console.log('onLoad', options?.no)
+  PRODUCT.detail({ no: options?.no }).then((res) => {
+    console.log('PRODUCT.detail', res)
+  })
 })
 </script>
 
