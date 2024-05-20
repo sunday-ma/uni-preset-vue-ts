@@ -16,9 +16,6 @@ const git = simpleGit()
 
   if (!desc)
     desc = `${new Date()}上传`
-  console.log('version:', version)
-  console.log('desc:', desc)
-  return false
 
   const project = new ci.Project({
     appid: 'wx1be960bc06f8c221',
@@ -26,7 +23,6 @@ const git = simpleGit()
     projectPath: `${process.cwd()}/dist/build/mp-weixin/`,
     privateKeyPath: `${process.cwd()}/conf/private.wx1be960bc06f8c221.key`,
     ignores: ['node_modules/**/*'],
-    // ignores: [''],
   })
   try {
     const uploadResult = await ci.upload({
@@ -34,7 +30,6 @@ const git = simpleGit()
       version,
       desc,
       setting: {
-        // es6: true,
         minify: true,
       },
       onProgressUpdate: console.log,
