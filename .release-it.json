@@ -1,10 +1,7 @@
 {
   "git": {
-    "commitMessage": "chore: release v${version}"
-  },
-  "github": {
-    "release": false,
-    "draft": false
+    "commitMessage": "chore: release v${version}",
+    "tag": false
   },
   "npm": {
     "publish": false
