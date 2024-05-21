@@ -1,21 +1,22 @@
 const process = require('node:process')
 const ci = require('miniprogram-ci')
-const simpleGit = require('simple-git')
+// const simpleGit = require('simple-git')
 let { version } = require('../package.json')
 
-const git = simpleGit()
+// const git = simpleGit()
 // 微信小程序构建发布 https://help.aliyun.com/document_detail/202392.html?spm=a2c6h.13066369.question.13.775c819f4jRCbD
 
 /* eslint import/newline-after-import: "off" */
 ; (async () => {
-  const log = await git.log()
-  let desc = log.latest.message
+  // const log = await git.log()
+  // let desc = log.latest.message
+  let desc = ''
 
   if (!version)
     version = 'v1.0.0'
 
   if (!desc)
-    desc = `${new Date()}上传`
+    desc = `${new Date().toLocaleString()}上传`
 
   const project = new ci.Project({
     appid: 'wx1be960bc06f8c221',
