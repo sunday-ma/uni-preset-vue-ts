@@ -1,6 +1,6 @@
 {
   "name": "warm-sun-cloud-quilt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "暖阳云被",
   "engines": {
     "node": ">=18",
