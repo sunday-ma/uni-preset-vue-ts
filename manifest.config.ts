@@ -75,12 +75,23 @@ export default defineManifestConfig({
     appid: VITE_WX_APPID,
     setting: {
       urlCheck: false,
+      es6: true,
+      minified: true,
+      postcss: true,
     },
     usingComponents: true,
+    libVersion: '3.0.0',
     lazyCodeLoading: 'requiredComponents',
   },
   'mp-alipay': {
     usingComponents: true,
+    setting: {
+      urlCheck: false,
+      es6: true,
+      minified: true,
+      postcss: true,
+    },
+    lazyCodeLoading: 'requiredComponents',
   },
   'mp-baidu': {
     usingComponents: true,

@@ -1,6 +1,5 @@
 const process = require('node:process')
 const ci = require('miniprogram-ci')
-// const simpleGit = require('simple-git')
 let { version } = require('../package.json')
 
 // const git = simpleGit()
@@ -8,8 +7,6 @@ let { version } = require('../package.json')
 
 /* eslint import/newline-after-import: "off" */
 ; (async () => {
-  // const log = await git.log()
-  // let desc = log.latest.message
   let desc = ''
 
   if (!version)
@@ -21,7 +18,7 @@ let { version } = require('../package.json')
   const project = new ci.Project({
     appid: 'wx1be960bc06f8c221',
     type: 'miniProgram',
-    projectPath: `${process.cwd()}/dist/build/mp-weixin/`,
+    projectPath: `${process.cwd()}/dist/build/mp-weixin`,
     privateKeyPath: `${process.cwd()}/conf/private.wx1be960bc06f8c221.key`,
     ignores: ['node_modules/**/*'],
   })
@@ -31,6 +28,7 @@ let { version } = require('../package.json')
       version,
       desc,
       setting: {
+        es6: false,
         minify: true,
       },
       onProgressUpdate: console.log,

@@ -1,13 +1,13 @@
 import { createSSRApp } from 'vue'
-import { pinia } from './utils/pinia'
+import { setupStore } from './stores'
 
-import 'uno.css'
 import App from './App.vue'
+import 'uno.css'
+// import '@nutui/touch-emulator'
 
 export function createApp() {
   const app = createSSRApp(App)
-  app.use(pinia)
-
+  setupStore(app)
   return {
     app,
   }

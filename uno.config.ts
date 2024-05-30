@@ -1,18 +1,39 @@
-// import process from 'node:process'
-import { presetIcons } from 'unocss'
-import transformerVariantGroup from '@unocss/transformer-variant-group'
-import transformerDirectives from '@unocss/transformer-directives'
-import presetWeapp from 'unocss-preset-weapp'
-import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
+import type { Preset, SourceCodeTransformer } from 'unocss'
 
-const { presetWeappAttributify, transformerAttributify } = extractorAttributify()
+import {
+  defineConfig,
+  presetAttributify,
+  presetIcons,
+  presetUno,
+  transformerDirectives,
+  transformerVariantGroup,
+} from 'unocss'
 
-export default {
+import { isH5, isMp } from '@uni-helper/uni-env'
+
+import { presetApplet, presetRemRpx, transformerApplet, transformerAttributify } from 'unocss-applet'
+
+const presets: Preset[] = []
+
+const transformers: SourceCodeTransformer[] = []
+const darkMode = isH5 ? 'class' : 'media'
+
+if (isMp) {
+  presets.push(presetApplet({ dark: darkMode }))
+  presets.push(presetRemRpx())
+  transformers.push(transformerAttributify({ ignoreAttributes: ['block', 'fixed', 'align'] }))
+  transformers.push(transformerApplet())
+}
+else {
+  presets.push(presetUno({ dark: darkMode }))
+  presets.push(presetAttributify())
+  presets.push(presetRemRpx({ mode: 'rpx2rem' }))
+}
+
+export default defineConfig({
   presets: [
-    presetWeapp(),
-    presetWeappAttributify(),
     presetIcons({
-      scale: 1,
+      scale: 1.2,
       warn: true,
       extraProperties: {
         'display': 'inline-block',
@@ -20,18 +41,17 @@ export default {
         'line-height': '1',
       },
     }),
+    ...presets,
   ],
   shortcuts: [
     {
       'flex-center': 'justify-center items-center',
     },
   ],
-  transformers: [
-    transformerAttributify(),
-    transformerClass(),
-    transformerDirectives(),
-    transformerVariantGroup(),
-  ],
+  transformers: [transformerDirectives(), transformerVariantGroup(), ...transformers],
+  theme: {
+    preflightRoot: isMp ? ['page,::before,::after'] : undefined,
+  },
   rules: [
     [
       'p-safe',
@@ -43,4 +63,4 @@ export default {
     ['pt-safe', { 'padding-top': 'calc(env(safe-area-inset-top) + 40rpx)' }],
     ['pb-safe', { 'padding-bottom': 'calc(env(safe-area-inset-bottom) + 40rpx)' }],
   ],
-}
+})

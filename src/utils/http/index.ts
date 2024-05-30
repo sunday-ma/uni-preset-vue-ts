@@ -14,19 +14,30 @@ const { onAuthRequired, onResponseRefreshToken } = createClientTokenAuthenticati
 const alovaInstance = createAlova({
   baseURL: import.meta.env.VITE_SERVER_BASEURL,
   ...AdapterUniapp(),
-  localCache: null,
+  // localCache: null,
   statesHook: VueHook,
   // 全局请求拦截器
   beforeRequest: onAuthRequired((method) => {
     console.log('beforeRequest', method)
+    // 如果上一个请求返回的状态码非 200，则取消当前请求
+    // if (true)
+    //   method.abort()
   }),
   // 全局响应拦截器
   responded: onResponseRefreshToken({
     onSuccess: (response, method) => {
       console.log('responded onSuccess response', response)
       console.log('responded onSuccess method', method)
-      if (response.statusCode === 200)
-        return response?.data
+
+      if (response.statusCode === 200) {
+        // 上传和下载直接返回 response
+        const requestType = method.config.requestType
+        if (requestType === 'upload' || requestType === 'download')
+          return response
+        // 其他请求返回
+        else
+          return (response as UniApp.RequestSuccessCallbackResult).data
+      }
 
       return response
     },

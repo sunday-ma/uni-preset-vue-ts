@@ -52,56 +52,9 @@ onHide(() => {
 
 page {
   background-color: #F9F7F4;
-  --at-apply: pb-safe;
 }
 view {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
-}
-.module-head {
-  &-title {
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 8rpx;
-      height: 24rpx;
-      border-radius: 23rpx;
-      background: #FFAA00;
-      transform: translateY(-50%);
-    }
-  }
-}
-
-@for $i from 1 through 5 {
-  .line-#{$i} {
-    @if $i == '1' {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    } @else {
-      display: -webkit-box!important;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      word-break: break-all;
-      -webkit-line-clamp: $i;
-      -webkit-box-orient: vertical!important;
-    }
-  }
-}
-
-.component-sku-popup .nut-popup__close-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32rpx !important;
-  height: 32rpx !important;
-  font-size: 32rpx !important;
-  color: #FFAA00;
-}
-
-::v-deep .component-empty .nut-empty__box {
-  height: auto !important;
 }
 </style>

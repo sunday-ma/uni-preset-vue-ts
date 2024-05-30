@@ -104,6 +104,10 @@
     "useChooseImage": true,
     "useCopy": true,
     "useCall": true,
-    "useImage": true
+    "useImage": true,
+    "pinia": true,
+    "setupStore": true,
+    "useAppStore": true,
+    "useAppStoreWidthOut": true
   }
 }

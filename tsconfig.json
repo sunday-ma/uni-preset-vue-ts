@@ -1,29 +1,26 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "lib": ["esnext", "dom"],
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["@dcloudio/types", "miniprogram-api-typings", "nutui-uniapp/global.d.ts"],
-    "importsNotUsedAsValues": "remove",
+    "resolveJsonModule": true,
+    "types": ["@dcloudio/types", "@types/wechat-miniprogram", "nutui-uniapp/global.d.ts"],
+    "allowJs": true,
+    "noImplicitThis": true,
     "outDir": "dist",
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "ignoreDeprecations": "5.0"
+    "skipLibCheck": true
   },
   "vueCompilerOptions": {
     "target": 3,
-    "nativeTags": [
-      "block",
-      "template",
-      "component",
-      "slot"
-    ]
+    "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json", "eslint.config.mjs"],
+  "include": ["node_modules/nutui-uniapp/global.d.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json", "eslint.config.mjs"],
   "exclude": ["node_modules"]
 }

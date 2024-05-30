@@ -6,34 +6,9 @@ export default defineUniPages({
   // 分包在 vite.config.ts 中配置
   pages: [],
   globalStyle: {
-    navigationBarTitleText: '暖阳云被',
+    navigationBarTitleText: '示例',
     navigationBarTextStyle: 'black',
     navigationBarBackgroundColor: '#fff',
     backgroundColor: '#fff',
-  },
-  tabBar: {
-    color: '#999',
-    selectedColor: '#333',
-    backgroundColor: '#fff',
-    list: [
-      {
-        pagePath: 'pages/index/index',
-        iconPath: 'static/tabbar/home.png',
-        selectedIconPath: 'static/tabbar/home-sekected.png',
-        text: '首页',
-      },
-      {
-        pagePath: 'pages/site/site',
-        iconPath: 'static/tabbar/site.png',
-        selectedIconPath: 'static/tabbar/site-sekected.png',
-        text: '服务点',
-      },
-      {
-        pagePath: 'pages/mine/mine',
-        iconPath: 'static/tabbar/mine.png',
-        selectedIconPath: 'static/tabbar/mine-sekected.png',
-        text: '我的',
-      },
-    ],
   },
 })

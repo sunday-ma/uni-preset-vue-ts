@@ -4,6 +4,7 @@ import { defineConfig, loadEnv } from 'vite'
 import Uni from '@dcloudio/vite-plugin-uni'
 import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
+import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from '@uni-helper/vite-plugin-uni-components'
@@ -40,22 +41,25 @@ export default async ({ command, mode }) => {
     plugins: [
       // UniPages：https://github.com/uni-helper/vite-plugin-uni-pages
       UniPages({
-        configSource: 'pages.config.ts',
-        exclude: ['**/components/**/**.*'],
-        routeBlockLang: 'json5', // 虽然设了默认值，但是vue文件还是要加上 lang="json5", 这样才能很好地格式化
-        homePage: 'pages/index/index', // 首页路径
-        subPackages: ['src/pages-site'],
-        dts: 'src/typings/uni-pages.d.ts',
+        // configSource: 'pages.config.ts',
+        // exclude: ['**/components/**/**.*'],
+        // routeBlockLang: 'json5', // 虽然设了默认值，但是vue文件还是要加上 lang="json5", 这样才能很好地格式化
+        // homePage: 'pages/index/index', // 首页路径
+        // // subPackages: ['src/pages-site'],
+        // dts: 'src/typings/uni-pages.d.ts',
+        minify: true,
       }),
       // UniManifest：https://github.com/uni-helper/vite-plugin-uni-manifest
-      UniManifest(),
+      UniManifest({
+        minify: true,
+      }),
       Components({
         resolvers: [NutResolver()],
         dirs: ['src/components'],
         dts: 'src/typings/vue-components.d.ts',
         version: 3,
       }),
-      Uni(),
+      UniLayouts(),
       AutoImport({
         eslintrc: {
           enabled: true,
@@ -75,10 +79,12 @@ export default async ({ command, mode }) => {
         ignore: ['createApp'],
         dirs: ['src/stores', 'src/composables'],
         dts: 'src/typings/auto-import.d.ts',
+        vueTemplate: true,
       }),
       UnoCss({
         hmrTopLevelAwait: false,
       }),
+      Uni(),
     ],
     server: {
       hmr: true,
@@ -89,6 +95,13 @@ export default async ({ command, mode }) => {
         '@': path.join(process.cwd(), './src'),
       },
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "nutui-uniapp/styles/variables.scss";',
+        },
+      },
     },
   })
 }
