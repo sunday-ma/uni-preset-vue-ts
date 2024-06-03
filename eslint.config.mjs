@@ -4,7 +4,7 @@ export default antfu({
   stylistic: true,
   typescript: true,
   vue: true,
-  ignores: ['dist*', 'output', 'cache', 'static', 'public', '**/node_modules/', '**/*.d.ts', '**/*.md'],
+  ignores: ['dist*', 'output', 'cache', 'static', 'public', '**/node_modules/', '**/*.d.ts', '**/*.md', '**/uni_modules/'],
 }, {
   rules: {
     'no-unused-vars': 'off',
