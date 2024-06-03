@@ -7,27 +7,35 @@
 </route>
 
 <script lang="ts" setup>
+import { AirDateTime } from 'airpower'
+
 const title = ref('123')
+
+console.log(AirDateTime.getMilliTimeStamps(new Date()))
+console.log(AirDateTime.formatFromMilliSecond(1717385307332))
+
+onLoad(() => {
+})
 </script>
 
 <template>
   <view class="page">
     {{ title }}
+    <view>
+      百度图表
+    </view>
+    <view>
+      ICON
+    </view>
+    <view>
+      Airpower
+    </view>
     <view class="i-carbon-carbon-for-ibm-product" />
     <nut-button type="primary">
       主要按钮
     </nut-button>
-    <view class="grid gap-20rpx">
-      <view class="h-30vh bg-#f1f1f1" />
-      <view class="h-30vh bg-#f1f1f1" />
-      <view class="h-30vh bg-#f1f1f1" />
-      <view class="h-30vh bg-#f1f1f1" />
-      <view class="h-30vh bg-#f1f1f1" />
-      <view class="h-30vh bg-#f1f1f1" />
-    </view>
   </view>
 </template>
 
 <style lang="scss" scoped>
-
 </style>

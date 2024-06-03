@@ -1,26 +1,53 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "baseUrl": ".",
-    "module": "ESNext",
     "moduleResolution": "Node",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
-    "resolveJsonModule": true,
-    "types": ["@dcloudio/types", "@types/wechat-miniprogram", "nutui-uniapp/global.d.ts"],
+    "types": [
+      "@dcloudio/types",
+      "@types/wechat-miniprogram",
+      "nutui-uniapp/global.d.ts",
+      "./src/uni_modules/z-paging/global.d.ts"
+    ],
     "allowJs": true,
-    "noImplicitThis": true,
-    "outDir": "dist",
+    "importsNotUsedAsValues": "preserve",
+    "preserveValueImports": false,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "verbatimModuleSyntax": false,
+    "ignoreDeprecations": "5.0"
   },
   "vueCompilerOptions": {
     "target": 3,
-    "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
+    "plugins": [
+      "@uni-helper/uni-app-types/volar-plugin"
+    ]
   },
-  "include": ["node_modules/nutui-uniapp/global.d.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json", "eslint.config.mjs"],
-  "exclude": ["node_modules"]
+  "include": [
+    "node_modules/nutui-uniapp/global.d.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.json",
+    "eslint.config.mjs",
+    "src/static/echarts/wx-canvas.js",
+    "src/static/echarts/echarts.js",
+    "./src/uni_modules/z-paging/global.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

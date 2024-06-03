@@ -92,6 +92,7 @@ export default defineManifestConfig({
       postcss: true,
     },
     lazyCodeLoading: 'requiredComponents',
+    allowsBounceVertical: 'NO',
   },
   'mp-baidu': {
     usingComponents: true,

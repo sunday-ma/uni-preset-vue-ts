@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Component: typeof import('./../components/component/component.vue')['default']
     LoadImage: typeof import('./../components/load-image/load-image.vue')['default']
-    NutBacktop: typeof import('nutui-uniapp/components/backtop/backtop.vue')['default']
     NutButton: typeof import('nutui-uniapp/components/button/button.vue')['default']
     NutConfigProvider: typeof import('nutui-uniapp/components/configprovider/configprovider.vue')['default']
   }

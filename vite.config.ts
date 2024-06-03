@@ -5,9 +5,9 @@ import Uni from '@dcloudio/vite-plugin-uni'
 import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
+import Components from '@uni-helper/vite-plugin-uni-components'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from '@uni-helper/vite-plugin-uni-components'
 import { NutResolver } from 'nutui-uniapp'
 
 // https://vitejs.dev/config/
@@ -55,7 +55,7 @@ export default async ({ command, mode }) => {
       }),
       Components({
         resolvers: [NutResolver()],
-        dirs: ['src/components'],
+        // dirs: ['src/components'],
         dts: 'src/typings/vue-components.d.ts',
         version: 3,
       }),

@@ -3,12 +3,15 @@ import VueHook from 'alova/vue'
 import type { uniappRequestAdapter } from '@alova/adapter-uniapp'
 import AdapterUniapp from '@alova/adapter-uniapp'
 import { createClientTokenAuthentication } from '@alova/scene-vue'
+import { Config } from '../config'
 
 const { onAuthRequired, onResponseRefreshToken } = createClientTokenAuthentication<
   typeof VueHook,
   typeof uniappRequestAdapter
   >({
-
+    assignToken: (method) => {
+      console.log('assignToken', method)
+    },
   })
 
 const alovaInstance = createAlova({
@@ -29,7 +32,7 @@ const alovaInstance = createAlova({
       console.log('responded onSuccess response', response)
       console.log('responded onSuccess method', method)
 
-      if (response.statusCode === 200) {
+      if (response.statusCode === Config.successCode) {
         // 上传和下载直接返回 response
         const requestType = method.config.requestType
         if (requestType === 'upload' || requestType === 'download')
@@ -39,11 +42,36 @@ const alovaInstance = createAlova({
           return (response as UniApp.RequestSuccessCallbackResult).data
       }
 
+      // 签名验证失败，重新登录
+      if (response.statusCode === Config.unAuthorizeCode) {
+        // code
+      }
+
+      // 权限异常
+      if (response.statusCode === 403) {
+        // code
+      }
+
+      // 请求的资源不存在
+      if (response.statusCode === 404) {
+        // code
+      }
+
+      // 请求超过频率限制
+      if (response.statusCode === 429) {
+        // code
+      }
+
       return response
     },
     onError: (error, method) => {
       console.log('responded onError error', error)
       console.log('responded onError method', method)
+
+      // 服务器内部错误
+      if (error.statusCode === Config.serverErrorCode) {
+        // code
+      }
     },
     onComplete: (method) => {
       console.log('responded onComplete', method)
