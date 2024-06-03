@@ -46,6 +46,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
+    "commit": "git add . && git-cz",
     "release": "release-it"
   },
   "dependencies": {
@@ -79,6 +80,7 @@
     "@antfu/eslint-config": "^2.20.0",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/cz-commitlint": "^19.2.0",
     "@dcloudio/types": "^3.4.8",
     "@dcloudio/uni-automator": "3.0.0-4010520240507001",
     "@dcloudio/uni-cli-shared": "3.0.0-4010520240507001",
@@ -110,5 +112,10 @@
     "**/*.{vue,js,ts,jsx,tsx}": [
       "eslint . --fix"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   }
 }
