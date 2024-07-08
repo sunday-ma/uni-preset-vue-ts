@@ -13,5 +13,7 @@ declare module '@vue/runtime-core' {
     LoadImage: typeof import('./../components/load-image/load-image.vue')['default']
     NutButton: typeof import('nutui-uniapp/components/button/button.vue')['default']
     NutConfigProvider: typeof import('nutui-uniapp/components/configprovider/configprovider.vue')['default']
+    NutInput: typeof import('nutui-uniapp/components/input/input.vue')['default']
+    NutPopup: typeof import('nutui-uniapp/components/popup/popup.vue')['default']
   }
 }

@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-const themeVars = reactive({})
 </script>
 
 <template>
-  <nut-config-provider :theme-vars="themeVars">
+  <nut-config-provider>
     <!-- #region 全局返回顶部  -->
     <!-- <nut-backtop>
       <template #content>

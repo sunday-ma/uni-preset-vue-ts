@@ -1,37 +1,17 @@
-import type { Preset, SourceCodeTransformer } from 'unocss'
+import { presetIcons } from 'unocss'
+import transformerVariantGroup from '@unocss/transformer-variant-group'
+import transformerDirectives from '@unocss/transformer-directives'
+import presetWeapp from 'unocss-preset-weapp'
+import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
 
-import {
-  defineConfig,
-  presetAttributify,
-  presetIcons,
-  presetUno,
-  transformerDirectives,
-  transformerVariantGroup,
-} from 'unocss'
+const { presetWeappAttributify, transformerAttributify } = extractorAttributify()
 
-import { isH5, isMp } from '@uni-helper/uni-env'
-
-import { presetApplet, presetRemRpx, transformerAttributify } from 'unocss-applet'
-
-const presets: Preset[] = []
-
-const transformers: SourceCodeTransformer[] = []
-const darkMode = isH5 ? 'class' : 'media'
-
-if (isMp) {
-  presets.push(presetApplet({ dark: darkMode }))
-  presets.push(presetRemRpx())
-  transformers.push(transformerAttributify({ ignoreAttributes: ['block', 'fixed', 'align'] }))
-}
-else {
-  presets.push(presetUno({ dark: darkMode }))
-  presets.push(presetRemRpx({ mode: 'rpx2rem' }))
-}
-
-export default defineConfig({
+export default {
   presets: [
+    presetWeapp(),
+    presetWeappAttributify(),
     presetIcons({
-      scale: 1.2,
+      scale: 1,
       warn: true,
       extraProperties: {
         'display': 'inline-block',
@@ -39,18 +19,18 @@ export default defineConfig({
         'line-height': '1',
       },
     }),
-    presetAttributify(),
-    ...presets,
   ],
   shortcuts: [
     {
       'flex-center': 'justify-center items-center',
     },
   ],
-  transformers: [transformerDirectives(), transformerVariantGroup(), ...transformers],
-  theme: {
-    preflightRoot: isMp ? ['page,::before,::after'] : undefined,
-  },
+  transformers: [
+    transformerAttributify(),
+    transformerClass(),
+    transformerDirectives(),
+    transformerVariantGroup(),
+  ],
   rules: [
     [
       'p-safe',
@@ -62,4 +42,4 @@ export default defineConfig({
     ['pt-safe', { 'padding-top': 'calc(env(safe-area-inset-top) + 40rpx)' }],
     ['pb-safe', { 'padding-bottom': 'calc(env(safe-area-inset-bottom) + 40rpx)' }],
   ],
-})
+}

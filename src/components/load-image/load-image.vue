@@ -1,7 +1,7 @@
 <!--
-  微信小程序图片转webp展示
-  要求图片服务器为七牛云，七牛云支持图片格式转换
- -->
+  # 微信小程序图片转webp展示
+  # 要求图片服务器为七牛云，七牛云支持图片格式转换
+-->
 <script lang="ts" setup>
 import type { LoadImageProps } from './load-image'
 import defaultImage from './image-previewplaceholder.jpg'

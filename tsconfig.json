@@ -19,7 +19,7 @@
       "@dcloudio/types",
       "@types/wechat-miniprogram",
       "nutui-uniapp/global.d.ts",
-      "./src/uni_modules/z-paging/global.d.ts"
+      "z-paging/global.d.ts"
     ],
     "allowJs": true,
     "importsNotUsedAsValues": "preserve",
@@ -42,10 +42,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/**/*.json",
-    "eslint.config.mjs"
   ],
   "exclude": [
     "node_modules",
-    "./src/uni_modules"
+    "src/uni_modules"
   ]
 }

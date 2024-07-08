@@ -1,10 +1,14 @@
+/** @type {import('eslint').Linter.Config} */
+
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
   stylistic: true,
   typescript: true,
   vue: true,
-  ignores: ['dist*', 'output', 'cache', 'static', 'public', '**/node_modules/', '**/*.d.ts', '**/*.md', '**/uni_modules/'],
+  formatters: true,
+  unocss: true,
+  ignores: ['dist*', 'output', 'cache', 'static', 'public', '**/node_modules/', '**/*.d.ts', '**/*.md', 'src/uni_modules'],
 }, {
   rules: {
     'no-unused-vars': 'off',

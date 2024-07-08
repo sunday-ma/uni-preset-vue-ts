@@ -6,11 +6,15 @@ import type { PiniaPluginContext } from 'pinia'
 export function piniaUniStoragePlugin({ store, options }: PiniaPluginContext) {
   if (options.saveLocal) {
     for (const stateKey in store.$state) {
-      if (uni.getStorageSync(stateKey))
+      if (uni.getStorageSync(stateKey)) {
         store.$state[stateKey] = JSON.parse(uni.getStorageSync(stateKey))
+      }
 
-      else
-        uni.setStorageSync(stateKey, JSON.stringify(store.$state[stateKey]))
+      else {
+        if (store.$state[stateKey]) {
+          uni.setStorageSync(stateKey, JSON.stringify(store.$state[stateKey]))
+        }
+      }
     }
 
     store.$subscribe((mutation, state) => {
