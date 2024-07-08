@@ -48,7 +48,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
-    "commit": "git add . && git-cz",
     "release": "release-it"
   },
   "dependencies": {

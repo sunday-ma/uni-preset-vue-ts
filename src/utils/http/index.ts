@@ -8,11 +8,11 @@ import { Config } from '../config'
 const { onAuthRequired, onResponseRefreshToken } = createClientTokenAuthentication<
   typeof VueHook,
   typeof uniappRequestAdapter
-  >({
-    assignToken: (method) => {
-      console.log('assignToken', method)
-    },
-  })
+>({
+  assignToken: (method) => {
+    console.log('assignToken', method)
+  },
+})
 
 const alovaInstance = createAlova({
   baseURL: import.meta.env.VITE_SERVER_BASEURL,
