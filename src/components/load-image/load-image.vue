@@ -19,7 +19,8 @@ const isLoading = ref(true)
 // https://oss.hisense-syxs.com/20240229/5a32d3af-a9e6-42d8-ad0f-22f8750b8437.png?imageMogr2/format/webp
 const imageUrl = computed(() => {
   let url = `${props.src}?`
-  props.useWebp && (url += 'imageMogr2/format/webp')
+  if (props.useWebp)
+    url += 'imageMogr2/format/webp'
   return url
 })
 </script>
@@ -34,9 +35,10 @@ const imageUrl = computed(() => {
     />
 
     <image
+      v-else
       :src="imageUrl"
-      mode="scaleToFill"
-      lazy-load
+      :mode="props.mode"
+      :lazy-load="props.lazyLoad"
     />
   </view>
 </template>

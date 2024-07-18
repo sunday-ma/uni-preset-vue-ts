@@ -35,6 +35,9 @@ onLoad(() => {
       <nut-button type="primary" @click="showPopup">
         拉起手机号短信验证
       </nut-button>
+      <template v-if="showBottom">
+        <h1>hello</h1>
+      </template>
     </view>
 
     <!-- #region 手机号短信验证 -->
