@@ -15,7 +15,7 @@ console.log(AirDateTime.formatFromMilliSecond(1717385307332))
 const showBottom = ref(false)
 
 function showPopup() {
-  showBottom.value = true
+  // showBottom.value = true
 }
 
 const phone = ref('')

@@ -1,33 +1,20 @@
 import { createAlova } from 'alova'
-import VueHook from 'alova/vue'
-import type { uniappRequestAdapter } from '@alova/adapter-uniapp'
 import AdapterUniapp from '@alova/adapter-uniapp'
-import { createClientTokenAuthentication } from '@alova/scene-vue'
 import { Config } from '../config'
-
-const { onAuthRequired, onResponseRefreshToken } = createClientTokenAuthentication<
-  typeof VueHook,
-  typeof uniappRequestAdapter
->({
-  assignToken: (method) => {
-    console.log('assignToken', method)
-  },
-})
 
 const alovaInstance = createAlova({
   baseURL: import.meta.env.VITE_SERVER_BASEURL,
   ...AdapterUniapp(),
-  // localCache: null,
-  statesHook: VueHook,
+  cacheFor: null,
   // 全局请求拦截器
-  beforeRequest: onAuthRequired((method) => {
+  beforeRequest(method) {
     console.log('beforeRequest', method)
     // 如果上一个请求返回的状态码非 200，则取消当前请求
     // if (true)
     //   method.abort()
-  }),
+  },
   // 全局响应拦截器
-  responded: onResponseRefreshToken({
+  responded: {
     onSuccess: (response, method) => {
       console.log('responded onSuccess response', response)
       console.log('responded onSuccess method', method)
@@ -48,17 +35,17 @@ const alovaInstance = createAlova({
       }
 
       // 权限异常
-      if (response.statusCode === 403) {
+      if (response.statusCode === Config.forBiddenCode) {
         // code
       }
 
       // 请求的资源不存在
-      if (response.statusCode === 404) {
+      if (response.statusCode === Config.notFoundCode) {
         // code
       }
 
       // 请求超过频率限制
-      if (response.statusCode === 429) {
+      if (response.statusCode === Config.tooManyRequestsCode) {
         // code
       }
 
@@ -71,12 +58,17 @@ const alovaInstance = createAlova({
       // 服务器内部错误
       if (error.statusCode === Config.serverErrorCode) {
         // code
+        uni.showModal({
+          title: '系统错误',
+          content: '系统发生了一些错误，请稍候再试',
+          showCancel: false,
+        })
       }
     },
     onComplete: (method) => {
       console.log('responded onComplete', method)
     },
-  }),
+  },
 })
 
 export const request = alovaInstance
