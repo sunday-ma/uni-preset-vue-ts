@@ -108,6 +108,9 @@
     "pinia": true,
     "setupStore": true,
     "useAppStore": true,
-    "useAppStoreWidthOut": true
+    "useAppStoreWidthOut": true,
+    "debounce": true,
+    "throttle": true,
+    "useQuery": true
   }
 }

@@ -16,6 +16,7 @@
       ]
     },
     "types": [
+      "vite/client",
       "@dcloudio/types",
       "@types/wechat-miniprogram",
       "nutui-uniapp/global.d.ts",
@@ -30,7 +31,6 @@
     "ignoreDeprecations": "5.0"
   },
   "vueCompilerOptions": {
-    "target": 3,
     "plugins": [
       "@uni-helper/uni-app-types/volar-plugin"
     ]

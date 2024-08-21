@@ -7,37 +7,131 @@
 </route>
 
 <script lang="ts" setup>
-import { AirDateTime } from 'airpower'
+import dayjs from 'dayjs'
+import { debounce, throttle } from '@/utils/lodash'
+import { useCounterStore } from '@/stores/counter'
 
-console.log(AirDateTime.getMilliTimeStamps(new Date()))
-console.log(AirDateTime.formatFromMilliSecond(1717385307332))
+const { query } = useQuery()
+
+const useCounter = useCounterStore()
+
+const btnClick1 = throttle(() => {
+  console.log('节流')
+}, 1000)
+
+const btnClick2 = debounce(() => {
+  console.log('防抖')
+  console.log(query.value)
+}, 1000)
 
 const showBottom = ref(false)
-
-function showPopup() {
-  // showBottom.value = true
-}
-
 const phone = ref('')
 const code = ref('')
+function showPopup() {
+  showBottom.value = true
+}
+
+/**
+ * 摇一摇
+ */
+const lastTime = ref(0)
+const vector = ref({
+  x: 0,
+  y: 0,
+  z: 0,
+  // lastX: 0,
+  // lastY: 0,
+  // lastZ: 0,
+})
+const shakeSpeed = ref(100)
+
+// const vector = ref({
+//   lastX: 0,
+//   lastY: 0,
+//   lastZ: 0,
+// })
+
+// const shakeThreshold = ref(5)
+
+function shake(res: UniNamespace.OnAccelerometerChangeSuccess) {
+  const nowTime = new Date().getTime()
+  if (nowTime - lastTime.value > 100) {
+    const diffTime = nowTime - lastTime.value
+    lastTime.value = nowTime
+    vector.value.x = res.x
+    vector.value.y = res.y
+    vector.value.z = res.z
+
+    // const speed = Math.abs(vector.value.x + vector.value.y + vector.value.z - vector.value.lastX - vector.value.lastY - vector.value.lastZ) / diffTime * 10000
+    const speed = Math.abs(vector.value.x + vector.value.y + vector.value.z) / diffTime * 10000
+
+    if (speed > shakeSpeed.value) {
+      uni.offAccelerometerChange(shake)
+      uni.vibrateLong({
+        success: () => {
+          console.log('success')
+          uni.stopAccelerometer()
+        },
+      })
+      // vector.value.lastX = vector.value.x
+      // vector.value.lastY = vector.value.y
+      // vector.value.lastZ = vector.value.z
+    }
+  }
+  // const { x, y, z } = res
+  // const diffX = Math.abs(x - vector.value.lastX)
+  // const diffY = Math.abs(y - vector.value.lastY)
+  // const diffZ = Math.abs(z - vector.value.lastZ)
+
+  // if (diffX > shakeThreshold.value || diffY > shakeThreshold.value || diffZ > shakeThreshold.value) {
+  //   uni.stopAccelerometer()
+  //   uni.vibrateLong({
+  //     success() {
+  //       console.log('success')
+  //     },
+  //   })
+  // }
+
+  // vector.value.lastX = x
+  // vector.value.lastY = y
+  // vector.value.lastZ = z
+}
+
+function handleShake() {
+  uni.onAccelerometerChange(shake)
+}
+
+debounce(() => {
+  console.log('防抖')
+}, 1000)
 
 onLoad(() => {
+  console.log('123')
+  console.log(dayjs(1717385307332).format('YYYY-MM-DD HH:mm:ss'))
 })
 </script>
 
 <template>
   <view class="page">
-    <view class="px-20rpx flex flex-col gap-20rpx">
-      <view class="i-carbon-carbon-for-ibm-product" />
+    <view class="flex flex-col gap-20rpx px-20rpx">
       <nut-button type="primary">
         主要按钮
+      </nut-button>
+      <nut-button type="primary" @click="btnClick1">
+        节流
+      </nut-button>
+      <nut-button type="primary" @click="btnClick2">
+        防抖
       </nut-button>
       <nut-button type="primary" @click="showPopup">
         拉起手机号短信验证
       </nut-button>
-      <template v-if="showBottom">
-        <h1>hello</h1>
-      </template>
+      <nut-button type="primary" @click="handleShake">
+        摇一摇
+      </nut-button>
+      <nut-button type="primary" @click="useCounter.increment">
+        {{ useCounter.count }}
+      </nut-button>
     </view>
 
     <!-- #region 手机号短信验证 -->
@@ -50,11 +144,11 @@ onLoad(() => {
       :safe-area-inset-bottom="true"
     >
       <view class="phone-sms-verify p-58rpx">
-        <view class="flex items-center">
+        <view class="flex items-center" @click="showBottom = false">
           <image
             src="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/shuijiao.jpg"
             mode="aspectFill"
-            class="mr-12rpx rounded-full h-50rpx w-50rpx"
+            class="mr-12rpx h-50rpx w-50rpx rounded-full"
           />
           <text class="text-28rpx text-#000 font-bold">
             测试小程序
@@ -70,7 +164,7 @@ onLoad(() => {
           </text>
         </view>
 
-        <view class="p-20rpx mt-50rpx bg-#fff rounded-18rpx">
+        <view class="mt-50rpx rounded-18rpx bg-#fff p-20rpx">
           <nut-input v-model="phone" :border="false" placeholder="请输入手机号" />
           <nut-input v-model="code" :border="false" placeholder="请输入验证码" />
           <view class="mt-10rpx w-100%">

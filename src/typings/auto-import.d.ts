@@ -10,6 +10,7 @@ declare global {
   const computed: typeof import('vue')['computed']
   const createPinia: typeof import('pinia')['createPinia']
   const customRef: typeof import('vue')['customRef']
+  const debounce: typeof import('lodash')['debounce']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
@@ -80,6 +81,7 @@ declare global {
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
   const storeToRefs: typeof import('pinia')['storeToRefs']
+  const throttle: typeof import('lodash')['throttle']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
@@ -97,6 +99,7 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useImage: typeof import('../composables/useImage')['useImage']
+  const useQuery: typeof import('../composables/useQuery')['useQuery']
   const useSlots: typeof import('vue')['useSlots']
   const useToast: typeof import('nutui-uniapp/composables')['useToast']
   const watch: typeof import('vue')['watch']
@@ -204,6 +207,7 @@ declare module 'vue' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useImage: UnwrapRef<typeof import('../composables/useImage')['useImage']>
+    readonly useQuery: UnwrapRef<typeof import('../composables/useQuery')['useQuery']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useToast: UnwrapRef<typeof import('nutui-uniapp/composables')['useToast']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
