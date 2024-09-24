@@ -1,14 +1,14 @@
 import path from 'node:path'
 import process from 'node:process'
-import { defineConfig, loadEnv } from 'vite'
 import Uni from '@dcloudio/vite-plugin-uni'
-import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
-import UniPages from '@uni-helper/vite-plugin-uni-pages'
-import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
-import Components from '@uni-helper/vite-plugin-uni-components'
+import UniHelperComponents from '@uni-helper/vite-plugin-uni-components'
+import UniHelperLayouts from '@uni-helper/vite-plugin-uni-layouts'
+import UniHelperManifest from '@uni-helper/vite-plugin-uni-manifest'
+import UniHelperPages from '@uni-helper/vite-plugin-uni-pages'
+import { NutResolver } from 'nutui-uniapp'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import { NutResolver } from 'nutui-uniapp'
+import { defineConfig, loadEnv } from 'vite'
 
 // https://vitejs.dev/config/
 export default async ({ command, mode }) => {
@@ -24,13 +24,13 @@ export default async ({ command, mode }) => {
   const env = loadEnv(mode, path.resolve(process.cwd(), 'env'))
   console.log('env', env)
   console.log('UNI_PLATFORM', process.env.UNI_PLATFORM) // 得到 mp-weixin, h5 等
-  const UnoCss = await import('unocss/vite').then(i => i.default)
+  const UnoCss = (await import('unocss/vite')).default
 
   return defineConfig({
     envDir: './env', // 自定义env目录
     build: {
-      target: 'es6',
-      cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
+      // target: 'es6',
+      // cssTarget: 'chrome61', // https://cn.vitejs.dev/config/build-options.html#build-csstarget
       // terserOptions: {
       //   compress: {
       //     drop_console: env.VITE_DELETE_CONSOLE === 'true',
@@ -39,27 +39,26 @@ export default async ({ command, mode }) => {
       // },
     },
     plugins: [
-      // UniPages：https://github.com/uni-helper/vite-plugin-uni-pages
-      UniPages({
-        // configSource: 'pages.config.ts',
-        // exclude: ['**/components/**/**.*'],
-        // routeBlockLang: 'json5', // 虽然设了默认值，但是vue文件还是要加上 lang="json5", 这样才能很好地格式化
-        // homePage: 'pages/index/index', // 首页路径
-        // // subPackages: ['src/pages-site'],
-        // dts: 'src/typings/uni-pages.d.ts',
+      // https://github.com/uni-helper/vite-plugin-uni-pages
+      UniHelperPages({
+        dts: 'src/typings/uni-pages.d.ts',
         minify: true,
       }),
-      // UniManifest：https://github.com/uni-helper/vite-plugin-uni-manifest
-      UniManifest({
+      // https://github.com/uni-helper/vite-plugin-uni-manifest
+      UniHelperManifest({
         minify: true,
       }),
-      Components({
-        resolvers: [NutResolver()],
-        // dirs: ['src/components'],
+      // https://github.com/uni-helper/vite-plugin-uni-components
+      UniHelperComponents({
         dts: 'src/typings/vue-components.d.ts',
+        directoryAsNamespace: true,
+        resolvers: [NutResolver()],
         version: 3,
       }),
-      UniLayouts(),
+      // https://github.com/uni-helper/vite-plugin-uni-layouts
+      UniHelperLayouts(),
+      Uni(),
+      // https://github.com/antfu/unplugin-auto-import
       AutoImport({
         eslintrc: {
           enabled: true,
@@ -84,7 +83,6 @@ export default async ({ command, mode }) => {
       UnoCss({
         hmrTopLevelAwait: false,
       }),
-      Uni(),
     ],
     server: {
       hmr: true,
@@ -99,7 +97,9 @@ export default async ({ command, mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "nutui-uniapp/styles/variables.scss";',
+          api: 'modern',
+          silenceDeprecations: ['legacy-js-api'],
+          // additionalData: '@import "nutui-uniapp/styles/variables.scss";',
         },
       },
     },

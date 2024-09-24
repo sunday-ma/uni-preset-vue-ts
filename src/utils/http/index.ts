@@ -1,6 +1,6 @@
-import { createAlova } from 'alova'
 import AdapterUniapp from '@alova/adapter-uniapp'
-import { Config } from '../config'
+import { createAlova } from 'alova'
+import { Config } from './config'
 
 const alovaInstance = createAlova({
   baseURL: import.meta.env.VITE_SERVER_BASEURL,
@@ -65,9 +65,9 @@ const alovaInstance = createAlova({
         })
       }
     },
-    onComplete: (method) => {
-      console.log('responded onComplete', method)
-    },
+    // onComplete: (method) => {
+    //   console.log('responded onComplete', method)
+    // },
   },
 })
 

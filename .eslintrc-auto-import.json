@@ -111,6 +111,10 @@
     "useAppStoreWidthOut": true,
     "debounce": true,
     "throttle": true,
-    "useQuery": true
+    "useQuery": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }

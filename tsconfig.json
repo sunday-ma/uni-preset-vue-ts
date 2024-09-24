@@ -1,47 +1,45 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     "lib": [
-      "esnext",
-      "dom"
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
     ],
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "baseUrl": ".",
-    "moduleResolution": "Node",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
     "types": [
-      "vite/client",
+      // uni-app + Vue 3 使用 Vite 构建，需要安装 vite
+      // "vite/client",
+      // uni API 相关的 TypeScript 类型，需要安装 @dcloudio/types
       "@dcloudio/types",
-      "@types/wechat-miniprogram",
-      "nutui-uniapp/global.d.ts",
-      "z-paging/global.d.ts"
+      // 为 uni-app 组件提供 TypeScript 类型，需要安装 @uni-helper/uni-types
+      "@uni-helper/uni-types",
+      // wx API 相关的 TypeScript 类型，需要安装 miniprogram-api-typings
+      "miniprogram-api-typings"
+      // nutui-uniapp 相关的 TypeScript 类型，需要安装 nutui-uniapp
+      // "nutui-uniapp/global.d.ts",
+      // z-paging 相关的 TypeScript 类型，需要安装 z-paging
+      // "z-paging/global.d.ts"
     ],
-    "allowJs": true,
-    "importsNotUsedAsValues": "preserve",
-    "preserveValueImports": false,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "verbatimModuleSyntax": false,
-    "ignoreDeprecations": "5.0"
+    "sourceMap": true
   },
   "vueCompilerOptions": {
+    // 调整 Volar（Vue 语言服务工具）解析行为，用于为 uni-app 组件提供 TypeScript 类型
     "plugins": [
-      "@uni-helper/uni-app-types/volar-plugin"
+      "@uni-helper/uni-types/volar-plugin"
     ]
   },
   "include": [
-    "node_modules/nutui-uniapp/global.d.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/**/*.json"
+    "*.d.ts"
   ],
   "exclude": [
     "node_modules",

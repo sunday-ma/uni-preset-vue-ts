@@ -23,24 +23,44 @@
 
 ## ⚡️ 插件
 
-|                插件名                | 作用                                                         |
-| :----------------------------------: | :----------------------------------------------------------- |
-|      @dcloudio/vite-plugin-uni       | **最核心的 `uni 插件`**，没有它就不能在 vite 项目跑 uniapp，其他所有的 `uni插件` 都需要经通过它的手来编译，所以写法上，都是先写 `UniXXX`，再写 `Uni` |
-|  @uni-helper/vite-plugin-uni-pages   | `uni 插件`，可以直接在本文件就能设置页面的路元信息，无需跑去 `pages.json` 配置，同时支持 `pages.config.ts` 编写 `pages.json` |
-| @uni-helper/vite-plugin-uni-layouts  | `uni 插件`，支多种 `layouts` 布局，可以脑洞大开，充分利用这个特性实现平时不容实现的写法 |
-| @uni-helper/vite-plugin-uni-manifest | `uni 插件`，支持 `manifest.config.ts` 编写 `manifest.json`   |
-|         @uni-helper/uni-env          | 在 `uni-app` 中判断当前环境                                  |
-|       @uni-helper/uni-promises       | `uni-app` promise 化的 `API`                                 |
-|      @uni-helper/uni-app-types       | `uni-app`内置组件提供 `TypeScript` 类型                      |
-|         @antfu/eslint-config         | Anthony大佬的`ESLint`配置预设                                |
-|         unplugin-auto-import         | 按需自动导入`API`                                            |
-|      @types/wechat-miniprogram       | 微信小程序`API`的类型定义                                    |
-|         unocss/unocss-applet         | 按需使用的原子 `CSS` 引擎和`uniapp`适配器                    |
-|           @iconify-json/*            | `iconify` 图标库，拥有 `10万+` 的海量图标                    |
+|                插件名                   | 作用                                                          |
+| :------------------------------------: | :----------------------------------------------------------- |
+|      @dcloudio/vite-plugin-uni         | **最核心的 `uni 插件`**，没有它就不能在 vite 项目跑 uniapp，其他所有的 `uni插件` 都需要经通过它的手来编译，所以写法上，都是先写 `UniXXX`，再写 `Uni` |
+|  @uni-helper/vite-plugin-uni-pages     | `uni 插件`，可以直接在本文件就能设置页面的路元信息，无需跑去 `pages.json` 配置，同时支持 `pages.config.ts` 编写 `pages.json` |
+| @uni-helper/vite-plugin-uni-layouts    | `uni 插件`，支多种 `layouts` 布局，可以脑洞大开，充分利用这个特性实现平时不容实现的写法 |
+| @uni-helper/vite-plugin-uni-manifest   | `uni 插件`，支持 `manifest.config.ts` 编写 `manifest.json` |
+|         @uni-helper/uni-env            | 在 `uni-app` 中判断当前环境  |
+|      @uni-helper/uni-types             | `uni-app`内置组件提供 `TypeScript` 类型|
+|         @antfu/eslint-config           | Anthony大佬的`ESLint`配置预设|
+|         unplugin-auto-import           | 按需自动导入`API`  |
+|      miniprogram-api-typings           | 微信小程序`API`的类型定义  |
+|         unocss/unocss-preset-weapp     | 按需使用的原子 `CSS` 引擎和`uniapp`适配器  |
+|           @iconify-json/*              | `iconify` 图标库，拥有 `10万+` 的海量图标  |
 
 ## 🦾 代码实践
 
-- 微信小程序CI上传代码：使用前需要使用小程序管理员身份访问"微信公众平台-开发-开发设置"后下载代码上传密钥，并配置 IP 白名单，才能进行上传、预览操作。
+- 开启 DarkMode，变量配置文件 theme.json
+
+  支持通过变量配置的属性如下所示：
+  
+  + 全局配置 globalStyle 与页面支持：
+    - navigationBarBackgroundColor
+    - navigationBarTextStyle
+    - backgroundColor
+    - backgroundTextStyle
+    - backgroundColorTop
+    - backgroundColorBottom
+
+  + 全局配置 tabBar 属性：
+    - color
+    - selectedColor
+    - backgroundColor
+    - borderStyle
+    - list
+      - iconPath
+      - selectedIconPath
+      
+<!-- - 微信小程序CI上传代码：使用前需要使用小程序管理员身份访问"微信公众平台-开发-开发设置"后下载代码上传密钥，并配置 IP 白名单，才能进行上传、预览操作。
 
     注意事项：
 
@@ -62,4 +82,4 @@
 
         2. 运行 `pnpm upload:weixin`
 
-        3. 观察控制台的日志
+        3. 观察控制台的日志 -->

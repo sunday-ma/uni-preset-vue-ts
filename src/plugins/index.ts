@@ -1,6 +1,6 @@
-import { createPinia } from 'pinia'
 import type { App } from 'vue'
 import { piniaUniStoragePlugin } from '@/plugins/piniaUniStoragePlugin'
+import { createPinia } from 'pinia'
 
 export const pinia = createPinia()
 

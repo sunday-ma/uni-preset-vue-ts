@@ -4,15 +4,13 @@ import { defineManifestConfig } from '@uni-helper/vite-plugin-uni-manifest'
 import { loadEnv } from 'vite'
 
 // 获取环境变量的范例
-const env = loadEnv(process.env.NODE_ENV!, path.resolve(process.cwd(), 'env'))
-
 const {
   VITE_APP_TITLE,
   VITE_UNI_APPID,
   VITE_WX_APPID,
   VITE_APP_PUBLIC_BASE,
   VITE_FALLBACK_LOCALE,
-} = env
+} = loadEnv(process.env.NODE_ENV!, path.resolve(process.cwd(), 'env'))
 
 export default defineManifestConfig({
   'name': VITE_APP_TITLE,
@@ -76,30 +74,19 @@ export default defineManifestConfig({
     setting: {
       urlCheck: false,
       es6: true,
-      minified: true,
       postcss: true,
+      minified: true,
     },
-    usingComponents: true,
-    libVersion: '3.0.0',
+    optimization: {
+      subPackages: true,
+    },
     lazyCodeLoading: 'requiredComponents',
   },
   'mp-alipay': {
-    usingComponents: true,
-    setting: {
-      urlCheck: false,
-      es6: true,
-      minified: true,
-      postcss: true,
-    },
     lazyCodeLoading: 'requiredComponents',
-    allowsBounceVertical: 'NO',
   },
-  'mp-baidu': {
-    usingComponents: true,
-  },
-  'mp-toutiao': {
-    usingComponents: true,
-  },
+  'mp-baidu': { },
+  'mp-toutiao': { },
   'h5': {
     router: {
       base: VITE_APP_PUBLIC_BASE,

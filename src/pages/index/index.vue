@@ -7,13 +7,15 @@
 </route>
 
 <script lang="ts" setup>
-import dayjs from 'dayjs'
-import { debounce, throttle } from '@/utils/lodash'
 import { useCounterStore } from '@/stores/counter'
+import { debounce, throttle } from '@/utils/lodash'
+// import dayjs from 'dayjs'
 
-const { query } = useQuery()
+// const { query } = useQuery()
 
 const useCounter = useCounterStore()
+
+const { phoneCall } = useCall()
 
 const btnClick1 = throttle(() => {
   console.log('节流')
@@ -21,7 +23,6 @@ const btnClick1 = throttle(() => {
 
 const btnClick2 = debounce(() => {
   console.log('防抖')
-  console.log(query.value)
 }, 1000)
 
 const showBottom = ref(false)
@@ -101,19 +102,14 @@ function handleShake() {
   uni.onAccelerometerChange(shake)
 }
 
-debounce(() => {
-  console.log('防抖')
-}, 1000)
-
 onLoad(() => {
-  console.log('123')
-  console.log(dayjs(1717385307332).format('YYYY-MM-DD HH:mm:ss'))
+  // console.log(DateTime.timeFrom('2024-09-23'))
 })
 </script>
 
 <template>
   <view class="page">
-    <view class="flex flex-col gap-20rpx px-20rpx">
+    <view class="flex flex-col gap-20rpx">
       <nut-button type="primary">
         主要按钮
       </nut-button>
@@ -128,6 +124,9 @@ onLoad(() => {
       </nut-button>
       <nut-button type="primary" @click="handleShake">
         摇一摇
+      </nut-button>
+      <nut-button type="primary" @click="phoneCall('110')">
+        拨打电话
       </nut-button>
       <nut-button type="primary" @click="useCounter.increment">
         {{ useCounter.count }}

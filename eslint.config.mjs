@@ -1,8 +1,8 @@
-/** @type {import('eslint').Linter.Config} */
+// /** @type {import('eslint').Linter.Config} */
 
-import antfu from '@antfu/eslint-config'
+import uniHelper from '@uni-helper/eslint-config'
 
-export default antfu({
+export default uniHelper({
   typescript: true,
   vue: true,
   formatters: true,

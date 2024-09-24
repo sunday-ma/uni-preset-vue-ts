@@ -7,13 +7,17 @@ export default defineUniPages({
    */
   globalStyle: {
     navigationBarTitleText: '示例',
-    navigationBarTextStyle: 'black',
-    navigationBarBackgroundColor: '#fff',
-    backgroundColor: '#fff',
+    backgroundColor: '@bgColor',
+    backgroundColorBottom: '@bgColorBottom',
+    backgroundColorTop: '@bgColorTop',
+    backgroundTextStyle: '@bgTxtStyle',
+    navigationBarBackgroundColor: '@navBgColor',
+    navigationBarTextStyle: '@navTxtStyle',
   },
   easycom: {
     custom: {
       '^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)': 'z-paging/components/z-paging$1/z-paging$1.vue',
+      '^z-tabs': '@zxlee/z-tabs/components/z-tabs/z-tabs.vue',
     },
   },
   /**

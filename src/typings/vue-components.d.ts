@@ -7,8 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Component: typeof import('./../components/component/component.vue')['default']
-    LoadImage: typeof import('./../components/load-image/load-image.vue')['default']
+    ComponentComponent: typeof import('./../components/component/component.vue')['default']
+    LoadImageLoadImage: typeof import('./../components/load-image/load-image.vue')['default']
     NutButton: typeof import('nutui-uniapp/components/button/button.vue')['default']
     NutConfigProvider: typeof import('nutui-uniapp/components/configprovider/configprovider.vue')['default']
     NutInput: typeof import('nutui-uniapp/components/input/input.vue')['default']

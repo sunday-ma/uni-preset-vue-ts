@@ -24,7 +24,7 @@ dist
 # conf
 private.*.key
 
-# lock 文件还是不要了，主要的版本写死就好了
+# lock
 pnpm-lock.yaml
 package-lock.json
 

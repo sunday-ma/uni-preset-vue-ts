@@ -1,6 +1,6 @@
-import { presetIcons } from 'unocss'
-import transformerVariantGroup from '@unocss/transformer-variant-group'
 import transformerDirectives from '@unocss/transformer-directives'
+import transformerVariantGroup from '@unocss/transformer-variant-group'
+import { presetIcons } from 'unocss'
 import presetWeapp from 'unocss-preset-weapp'
 import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
 
@@ -12,7 +12,7 @@ export default {
     presetWeappAttributify(),
     presetIcons({
       scale: 1,
-      warn: true,
+      warn: false,
       extraProperties: {
         'display': 'inline-block',
         'vertical-align': 'middle',
@@ -39,7 +39,8 @@ export default {
           'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
       },
     ],
-    ['pt-safe', { 'padding-top': 'calc(env(safe-area-inset-top) + 40rpx)' }],
-    ['pb-safe', { 'padding-bottom': 'calc(env(safe-area-inset-bottom) + 40rpx)' }],
+    // ['pt-safe', { 'padding-top': 'calc(env(safe-area-inset-top) + 40rpx)' }],
+    ['pt-safe', { 'padding-top': 'env(safe-area-inset-top)' }],
+    ['pb-safe', { 'padding-bottom': 'env(safe-area-inset-bottom)' }],
   ],
 }
